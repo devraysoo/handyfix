@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sign Up - HandyFix</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anta&family=Lexend:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://unpkg.com/lucide@latest/dist/lucide.css">
+<link rel="icon" href="https://ff6miz3krrdkxd1y.public.blob.vercel-storage.com/handy-fix-logo%20(2)-bwnd09bLrOhY9B8TUhgpa3kn1WeOLw.png" type="image/png">
+<script src="https://unpkg.com/lucide@latest"></script>
+
+<script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                colors: {
+                    primary: '#601008',
+                    secondary: '#F88820',
+                    accent: '#ffce0a',
+                },
+                fontFamily: {
+                    anta: ['Anta', 'sans-serif'],
+                    lexend: ['Lexend', 'sans-serif'],
+                    poppins: ['Poppins', 'sans-serif'],
+                },
+            }
+        }
+    }
+</script>
+
+<style>
+    body {
+        font-family: 'Lexend', sans-serif;
+    }
+    
+    .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 0.5rem;
+        font-weight: 500;
+        transition-property: color, background-color, border-color;
+        transition-duration: 150ms;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .btn-primary {
+        background-color: #601008;
+        color: white;
+    }
+    
+    .btn-primary:hover {
+        background-color: rgba(96, 16, 8, 0.9);
+    }
+    
+    .btn-secondary {
+        background-color: #F88820;
+        color: white;
+    }
+    
+    .btn-secondary:hover {
+        background-color: rgba(248, 136, 32, 0.9);
+    }
+    
+    .btn-outline {
+        background-color: transparent;
+        border: 1px solid;
+    }
+    
+    .btn-outline-primary {
+        border-color: #601008;
+        color: #601008;
+    }
+    
+    .btn-outline-primary:hover {
+        background-color: rgba(96, 16, 8, 0.1);
+    }
+</style>
+</head>
+<body class="min-h-screen bg-zinc-50">
+<!-- Header -->
+<header class="bg-white sticky top-0 z-50 shadow-sm">
+    <div class="container mx-auto max-w-6xl px-4">
+        <div class="flex items-center justify-between h-14 md:h-16">
+            <!-- Logo -->
+            <a href="index.html" class="flex items-center space-x-2">
+                <div class="bg-primary rounded-full w-7 h-7 md:w-8 md:h-8 flex items-center justify-center">
+                    <img src="https://ff6miz3krrdkxd1y.public.blob.vercel-storage.com/handy-fix-logo%20(2)-bwnd09bLrOhY9B8TUhgpa3kn1WeOLw.png" alt="FixConnect Logo" class="w-full h-full object-contain" />
+                </div>
+                <span class="font-bold text-lg md:text-xl text-primary font-anta">HandyFix</span>
+            </a>
+
+            <!-- Desktop Navigation -->
+            <nav class="hidden md:flex space-x-6 lg:space-x-8">
+                <a href="404.html" class="text-gray-700 hover:text-primary font-medium font-lexend">
+                    Services
+                </a>
+                <a href="404.html" class="text-gray-700 hover:text-primary font-medium font-lexend">
+                    Find Fixers
+                </a>
+                <a href="404.html" class="text-gray-700 hover:text-primary font-medium font-lexend">
+                    Post a Job
+                </a>
+                <a href="404.html" class="text-gray-700 hover:text-primary font-medium font-lexend">
+                    How It Works
+                </a>
+            </nav>
+
+            <!-- Auth Buttons - Desktop -->
+            <div class="hidden md:flex items-center space-x-3 lg:space-x-4">
+                <a href="login.html" class="btn btn-outline btn-outline-primary px-4 py-2 text-sm font-lexend">
+                    Log In
+                </a>
+                <a href="signup.html" class="btn btn-primary px-4 py-2 text-sm font-lexend">
+                    Sign Up
+                </a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-button" class="md:hidden p-1.5" aria-label="Open menu">
+                <i data-lucide="menu" class="h-5 w-5"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="md:hidden bg-white border-t hidden">
+        <div class="container mx-auto px-4 py-3">
+            <nav class="flex flex-col space-y-3">
+                <a href="404.html" class="py-2 text-gray-700 font-medium font-lexend">
+                    Services
+                </a>
+                <a href="404.html" class="py-2 text-gray-700 font-medium font-lexend">
+                    Find Fixers
+                </a>
+                <a href="404.html" class="py-2 text-gray-700 font-medium font-lexend">
+                    Post a Job
+                </a>
+                <a href="404.html" class="py-2 text-gray-700 font-medium font-lexend">
+                    How It Works
+                </a>
+                <div class="pt-2 flex flex-col space-y-2">
+                    <a href="login.html" class="btn btn-outline btn-outline-primary w-full justify-center py-2 font-lexend">
+                        Log In
+                    </a>
+                    <a href="signup.html" class="btn btn-primary w-full justify-center py-2 font-lexend">
+                        Sign Up
+                    </a>
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<!-- Signup Section -->
+<section class="py-12 md:py-16 px-4">
+    <div class="container mx-auto max-w-md">
+        <div class="bg-white rounded-lg shadow-md p-6 md:p-8">
+            <div class="text-center mb-6">
+                <h1 class="text-2xl md:text-3xl font-bold font-anta text-gray-800 mb-2">Create an Account</h1>
+                <p class="text-gray-600 font-lexend">Join HandyFix to find reliable service providers</p>
+            </div>
+            
+            <form>
+                <div class="space-y-4">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label for="firstName" class="block text-sm font-medium text-gray-700 mb-1 font-lexend">First Name</label>
+                            <input 
+                                type="text" 
+                                id="firstName" 
+                                name="firstName" 
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary/50 focus:border-primary font-lexend"
+                                placeholder="First name"
+                                required
+                            />
+                        </div>
+                        <div>
+                            <label for="lastName" class="block text-sm font-medium text-gray-700 mb-1 font-lexend">Last Name</label>
+                            <input 
+                                type="text" 
+                                id="lastName" 
+                                name="lastName" 
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary/50 focus:border-primary font-lexend"
+                                placeholder="Last name"
+                                required
+                            />
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-700 mb-1 font-lexend">Email Address</label>
+                        <div class="relative">
+                            <i data-lucide="mail" class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5"></i>
+                            <input 
+                                type="email" 
+                                id="email" 
+                                name="email" 
+                                class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary/50 focus:border-primary font-lexend"
+                                placeholder="Enter your email"
+                                required
+                            />
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label for="phone" class="block text-sm font-medium text-gray-700 mb-1 font-lexend">Phone Number</label>
+                        <div class="relative">
+                            <i data-lucide="phone" class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5"></i>
+                            <input 
+                                type="tel" 
+                                id="phone" 
+                                name="phone" 
+                                class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary/50 focus:border-primary font-lexend"
+                                placeholder="Enter your phone number"
+                                required
+                            />
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label for="password" class="block text-sm font-medium text-gray-700 mb-1 font-lexend">Password</label>
+                        <div class="relative">
+                            <i data-lucide="lock" class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5"></i>
+                            <input 
+                                type="password" 
+                                id="password" 
+                                name="password" 
+                                class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary/50 focus:border-primary font-lexend"
+                                placeholder="Create a password"
+                                required
+                            />
+                        </div>
+                        <p class="mt-1 text-xs text-gray-500 font-lexend">Password must be at least 8 characters long</p>
+                    </div>
+                    
+                    <div>
+                        <label for="confirmPassword" class="block text-sm font-medium text-gray-700 mb-1 font-lexend">Confirm Password</label>
+                        <div class="relative">
+                            <i data-lucide="lock" class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5"></i>
+                            <input 
+                                type="password" 
+                                id="confirmPassword" 
+                                name="confirmPassword" 
+                                class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary/50 focus:border-primary font-lexend"
+                                placeholder="Confirm your password"
+                                required
+                            />
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <input 
+                            type="checkbox" 
+                            id="terms" 
+                            name="terms" 
+                            class="h-4 w-4 mt-1 text-primary focus:ring-primary border-gray-300 rounded"
+                            required
+                        />
+                        <label for="terms" class="ml-2 block text-sm text-gray-700 font-lexend">
+                            I agree to the <a href="404.html" class="text-primary hover:text-primary/80">Terms of Service</a> and <a href="404.html" class="text-primary hover:text-primary/80">Privacy Policy</a>
+                        </label>
+                    </div>
+                    
+                    <button type="submit" class="w-full btn btn-primary py-2.5 font-medium font-lexend">
+                        Create Account
+                    </button>
+                </div>
+            </form>
+            
+            <div class="mt-6">
+                <div class="relative">
+                    <div class="absolute inset-0 flex items-center">
+                        <div class="w-full border-t border-gray-300"></div>
+                    </div>
+                    <div class="relative flex justify-center text-sm">
+                        <span class="px-2 bg-white text-gray-500 font-lexend">Or sign up with</span>
+                    </div>
+                </div>
+                
+                <div class="mt-6 grid grid-cols-2 gap-3">
+                    <button type="button" class="btn btn-outline border-gray-300 py-2.5 font-lexend">
+                        <i data-lucide="facebook" class="h-5 w-5 mr-2 text-blue-600"></i>
+                        Facebook
+                    </button>
+                    <button type="button" class="btn btn-outline border-gray-300 py-2.5 font-lexend">
+                        <i data-lucide="mail" class="h-5 w-5 mr-2 text-red-500"></i>
+                        Google
+                    </button>
+                </div>
+            </div>
+            
+            <p class="mt-6 text-center text-sm text-gray-600 font-lexend">
+                Already have an account? 
+                <a href="login.html" class="font-medium text-primary hover:text-primary/80">
+                    Log in
+                </a>
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-gray-900 text-white mt-auto">
+    <div class="container mx-auto max-w-6xl px-4 py-10 md:py-12">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+            <div>
+                <h3 class="font-bold text-xl mb-4 font-anta">FixConnect</h3>
+                <p class="text-gray-400 mb-4 text-sm md:text-base font-lexend">
+                    Connecting skilled service providers with customers across Ilocos Norte.
+                </p>
+                <div class="flex space-x-4">
+                    <a href="404.html" class="text-gray-400 hover:text-white transition-colors">
+                        <i data-lucide="facebook" class="h-5 w-5"></i>
+                    </a>
+                    <a href="404.html" class="text-gray-400 hover:text-white transition-colors">
+                        <i data-lucide="instagram" class="h-5 w-5"></i>
+                    </a>
+                    <a href="404.html" class="text-gray-400 hover:text-white transition-colors">
+                        <i data-lucide="twitter" class="h-5 w-5"></i>
+                    </a>
+                </div>
+            </div>
+            <div>
+                <h4 class="font-semibold text-lg mb-3 md:mb-4 font-anta">For Customers</h4>
+                <ul class="space-y-2 text-sm md:text-base font-lexend">
+                    <li>
+                        <a href="404.html" class="text-gray-400 hover:text-white transition-colors">
+                            Find a Service Provider
+                        </a>
+                    </li>
+                    <li>
+                        <a href="404.html" class="text-gray-400 hover:text-white transition-colors">
+                            Post a Job
+                        </a>
+                    </li>
+                    <li>
+                        <a href="404.html" class="text-gray-400 hover:text-white transition-colors">
+                            How It Works
+                        </a>
+                    </li>
+                    <li>
+                        <a href="404.html" class="text-gray-400 hover:text-white transition-colors">
+                            Customer Support
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-semibold text-lg mb-3 md:mb-4 font-anta">For Service Providers</h4>
+                <ul class="space-y-2 text-sm md:text-base font-lexend">
+                    <li>
+                        <a href="404.html" class="text-gray-400 hover:text-white transition-colors">
+                            Join as a Provider
+                        </a>
+                    </li>
+                    <li>
+                        <a href="404.html" class="text-gray-400 hover:text-white transition-colors">
+                            Find Jobs
+                        </a>
+                    </li>
+                    <li>
+                        <a href="404.html" class="text-gray-400 hover:text-white transition-colors">
+                            Build Your Profile
+                        </a>
+                    </li>
+                    <li>
+                        <a href="404.html" class="text-gray-400 hover:text-white transition-colors">
+                            Provider Resources
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-semibold text-lg mb-3 md:mb-4 font-anta">Company</h4>
+                <ul class="space-y-2 text-sm md:text-base font-lexend">
+                    <li>
+                        <a href="404.html" class="text-gray-400 hover:text-white transition-colors">
+                            About Us
+                        </a>
+                    </li>
+                    <li>
+                        <a href="404.html" class="text-gray-400 hover:text-white transition-colors">
+                            Careers
+                        </a>
+                    </li>
+                    <li>
+                        <a href="404.html" class="text-gray-400 hover:text-white transition-colors">
+                            Privacy Policy
+                        </a>
+                    </li>
+                    <li>
+                        <a href="404.html" class="text-gray-400 hover:text-white transition-colors">
+                            Terms of Service
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="border-t border-gray-800 mt-8 md:mt-10 pt-6 text-center text-gray-400 text-sm font-lexend">
+            <p>&copy; 2025 FixConnect Ilocos Norte. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // Initialize Lucide icons
+    lucide.createIcons();
+    
+    // Mobile menu toggle
+    document.getElementById('mobile-menu-button').addEventListener('click', function() {
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = this.querySelector('[data-lucide]');
+        
+        if (mobileMenu.classList.contains('hidden')) {
+            mobileMenu.classList.remove('hidden');
+            menuIcon.setAttribute('name', 'x');
+        } else {
+            mobileMenu.classList.add('hidden');
+            menuIcon.setAttribute('name', 'menu');
+        }
+        
+        // Re-initialize icons after changing the attribute
+        lucide.createIcons();
+    });
+</script>
+</body>
+</html>
