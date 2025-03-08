@@ -1,1 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HandyFix - Mission & Vision</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anta&family=Lexend:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://unpkg.com/lucide@latest/dist/lucide.css">
+    <link rel="icon" href="https://ff6miz3krrdkxd1y.public.blob.vercel-storage.com/handy-fix-logo%20(2)-bwnd09bLrOhY9B8TUhgpa3kn1WeOLw.png" type="image/png">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#601008',
+                        secondary: '#F88820',
+                        accent: '#ffce0a',
+                    },
+                    fontFamily: {
+                        anta: ['Anta', 'sans-serif'],
+                        lexend: ['Lexend', 'sans-serif'],
+                        poppins: ['Poppins', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            font-family: 'Lexend', sans-serif;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            transition-property: color, background-color, border-color;
+            transition-duration: 150ms;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .btn-primary {
+            background-color: #601008;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: rgba(96, 16, 8, 0.9);
+        }
+        
+        .btn-secondary {
+            background-color: #F88820;
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background-color: rgba(248, 136, 32, 0.9);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid;
+        }
+        
+        .btn-outline-primary {
+            border-color: #601008;
+            color: #601008;
+        }
+        
+        .btn-outline-primary:hover {
+            background-color: rgba(96, 16, 8, 0.1);
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-zinc-50">
+    <!-- Header -->
+    <header class="bg-white sticky top-0 z-50 shadow-sm">
+        <div class="container mx-auto max-w-6xl px-4">
+            <div class="flex items-center justify-between h-14 md:h-16">
+                <!-- Logo -->
+                <a href="index.html" class="flex items-center space-x-2">
+                    <div class="bg-primary rounded-full w-7 h-7 md:w-8 md:h-8 flex items-center justify-center">
+                        <img src="https://ff6miz3krrdkxd1y.public.blob.vercel-storage.com/handy-fix-logo%20(2)-bwnd09bLrOhY9B8TUhgpa3kn1WeOLw.png" alt="HandyFix Logo" class="w-full h-full object-contain" />
+                    </div>
+                    <span class="font-bold text-lg md:text-xl text-primary font-anta">HandyFix</span>
+                </a>
 
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex space-x-6 lg:space-x-8">
+                    <a href="404.html" class="text-gray-700 hover:text-primary font-medium font-lexend">
+                        Services
+                    </a>
+                    <a href="404.html" class="text-gray-700 hover:text-primary font-medium font-lexend">
+                        Find Fixers
+                    </a>
+                    <a href="404.html" class="text-gray-700 hover:text-primary font-medium font-lexend">
+                        Post a Job
+                    </a>
+                    <a href="mission-vision.html" class="text-primary border-b-2 border-primary font-medium font-lexend">
+                        Our Mission
+                    </a>
+                </nav>
+
+                <!-- Auth Buttons - Desktop -->
+                <div class="hidden md:flex items-center space-x-3 lg:space-x-4">
+                    <a href="404.html" class="btn btn-outline btn-outline-primary px-4 py-2 text-sm font-lexend">
+                        Log In
+                    </a>
+                    <a href="404.html" class="btn btn-primary px-4 py-2 text-sm font-lexend">
+                        Sign Up
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-button" class="md:hidden p-1.5" aria-label="Open menu">
+                    <i data-lucide="menu" class="h-5 w-5"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden bg-white border-t hidden">
+            <div class="container mx-auto px-4 py-3">
+                <nav class="flex flex-col space-y-3">
+                    <a href="404.html" class="py-2 text-gray-700 font-medium font-lexend">
+                        Services
+                    </a>
+                    <a href="404.html" class="py-2 text-gray-700 font-medium font-lexend">
+                        Find Fixers
+                    </a>
+                    <a href="404.html" class="py-2 text-gray-700 font-medium font-lexend">
+                        Post a Job
+                    </a>
+                    <a href="mission-vision.html" class="py-2 text-primary font-medium font-lexend">
+                        Our Mission
+                    </a>
+                    <div class="pt-2 flex flex-col space-y-2">
+                        <a href="404.html" class="btn btn-outline btn-outline-primary w-full justify-center py-2 font-lexend">
+                            Log In
+                        </a>
+                        <a href="404.html" class="btn btn-primary w-full justify-center py-2 font-lexend">
+                            Sign Up
+                        </a>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mission & Vision Hero Section -->
+    <section class="bg-primary px-4 py-16 md:py-20 text-white relative overflow-hidden">
+        <div class="absolute inset-0 bg-[url('https://ff6miz3krrdkxd1y.public.blob.vercel-storage.com/5288971104_d6b6d165ef_z-e80Zg9E1nZhipRDpD0lNNoKSSGjWtT.jpg')] opacity-10 bg-cover bg-center"></div>
+        <div class="container mx-auto max-w-6xl relative z-10">
+            <div class="max-w-3xl mx-auto text-center">
+                <div class="inline-block bg-accent/20 text-accent px-4 py-1 rounded-full mb-4 font-medium text-sm">
+                    <i data-lucide="heart-handshake" class="h-4 w-4 inline-block mr-1"></i>
+                    Our Purpose
+                </div>
+                <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold font-anta mb-6">
+                    Mission & Vision
+                </h1>
+                <p class="text-base md:text-lg mb-8 font-lexend leading-relaxed">
+                    HandyFix is dedicated to empowering skilled individuals in Ilocos Norte by connecting them with people who need their services, creating economic opportunities and building stronger communities.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission & Vision Statements -->
+    <section class="py-12 md:py-16 px-4">
+        <div class="container mx-auto max-w-6xl">
+            <div class="grid md:grid-cols-2 gap-8 md:gap-12">
+                <!-- Mission Statement -->
+                <div class="bg-white p-8 rounded-lg shadow-md border-t-4 border-primary">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="bg-primary/10 p-3 rounded-full text-primary">
+                            <i data-lucide="target" class="h-8 w-8"></i>
+                        </div>
+                        <h2 class="text-2xl md:text-3xl font-bold font-anta">Our Mission</h2>
+                    </div>
+                    <p class="text-gray-700 mb-4 font-lexend leading-relaxed">
+                        To create a platform that connects skilled individuals with people who need their services, providing economic opportunities for those with valuable skills but without formal employment.
+                    </p>
+                    <p class="text-gray-700 font-lexend leading-relaxed">
+                        We aim to empower local talent, reduce unemployment, and ensure that every household in Ilocos Norte has access to reliable, skilled service providers for their home maintenance and improvement needs.
+                    </p>
+                </div>
+                
+                <!-- Vision Statement -->
+                <div class="bg-white p-8 rounded-lg shadow-md border-t-4 border-secondary">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="bg-secondary/10 p-3 rounded-full text-secondary">
+                            <i data-lucide="eye" class="h-8 w-8"></i>
+                        </div>
+                        <h2 class="text-2xl md:text-3xl font-bold font-anta">Our Vision</h2>
+                    </div>
+                    <p class="text-gray-700 mb-4 font-lexend leading-relaxed">
+                        To build a thriving ecosystem where skilled individuals can find consistent work opportunities and financial stability, while customers receive high-quality, trustworthy home services.
+                    </p>
+                    <p class="text-gray-700 font-lexend leading-relaxed">
+                        We envision a future where HandyFix becomes the go-to platform for connecting service providers and customers across the Philippines, creating sustainable livelihoods and stronger communities.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How We Help Section -->
+    <section class="py-12 md:py-16 px-4 bg-zinc-100">
+        <div class="container mx-auto max-w-6xl">
+            <h2 class="text-2xl md:text-3xl font-bold mb-12 text-center font-anta">How HandyFix Makes a Difference</h2>
+            
+            <div class="grid md:grid-cols-2 gap-8 md:gap-12 mb-12">
+                <!-- For Service Providers -->
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-md">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="bg-primary/10 p-3 rounded-full text-primary">
+                            <i data-lucide="hammer" class="h-6 w-6"></i>
+                        </div>
+                        <h3 class="text-xl font-bold font-anta">For Skilled Workers</h3>
+                    </div>
+                    
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3">
+                            <div class="mt-1 bg-green-100 rounded-full p-1 flex-shrink-0">
+                                <i data-lucide="check" class="h-4 w-4 text-green-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-1 font-lexend">Economic Opportunity</h4>
+                                <p class="text-gray-600 text-sm font-lexend">
+                                    Provides a platform for skilled individuals without formal employment to find work and earn a stable income using their existing skills.
+                                </p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <div class="mt-1 bg-green-100 rounded-full p-1 flex-shrink-0">
+                                <i data-lucide="check" class="h-4 w-4 text-green-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-1 font-lexend">Flexible Work</h4>
+                                <p class="text-gray-600 text-sm font-lexend">
+                                    Allows service providers to choose their own hours, set their own rates, and work as much or as little as they want.
+                                </p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <div class="mt-1 bg-green-100 rounded-full p-1 flex-shrink-0">
+                                <i data-lucide="check" class="h-4 w-4 text-green-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-1 font-lexend">Skill Recognition</h4>
+                                <p class="text-gray-600 text-sm font-lexend">
+                                    Values practical skills and experience over formal qualifications, giving opportunities to those with real-world expertise.
+                                </p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <div class="mt-1 bg-green-100 rounded-full p-1 flex-shrink-0">
+                                <i data-lucide="check" class="h-4 w-4 text-green-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-1 font-lexend">Business Growth</h4>
+                                <p class="text-gray-600 text-sm font-lexend">
+                                    Helps skilled individuals build a reputation, expand their client base, and potentially grow into small business owners.
+                                </p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- For Customers -->
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-md">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="bg-secondary/10 p-3 rounded-full text-secondary">
+                            <i data-lucide="home" class="h-6 w-6"></i>
+                        </div>
+                        <h3 class="text-xl font-bold font-anta">For Customers</h3>
+                    </div>
+                    
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3">
+                            <div class="mt-1 bg-green-100 rounded-full p-1 flex-shrink-0">
+                                <i data-lucide="check" class="h-4 w-4 text-green-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-1 font-lexend">Reliable Service</h4>
+                                <p class="text-gray-600 text-sm font-lexend">
+                                    Access to vetted, skilled service providers with verified reviews and ratings from other customers.
+                                </p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <div class="mt-1 bg-green-100 rounded-full p-1 flex-shrink-0">
+                                <i data-lucide="check" class="h-4 w-4 text-green-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-1 font-lexend">Convenience</h4>
+                                <p class="text-gray-600 text-sm font-lexend">
+                                    Easy booking process, transparent pricing, and the ability to find the right person for any home service need.
+                                </p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <div class="mt-1 bg-green-100 rounded-full p-1 flex-shrink-0">
+                                <i data-lucide="check" class="h-4 w-4 text-green-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-1 font-lexend">Supporting Local</h4>
+                                <p class="text-gray-600 text-sm font-lexend">
+                                    Opportunity to support local skilled workers in your community rather than large corporations.
+                                </p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <div class="mt-1 bg-green-100 rounded-full p-1 flex-shrink-0">
+                                <i data-lucide="check" class="h-4 w-4 text-green-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-1 font-lexend">Quality Assurance</h4>
+                                <p class="text-gray-600 text-sm font-lexend">
+                                    Service guarantees and customer support to ensure satisfaction with every job completed.
+                                </p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Success Stories Section (Placeholder) -->
+    <section class="py-12 md:py-16 px-4">
+        <div class="container mx-auto max-w-6xl">
+            <h2 class="text-2xl md:text-3xl font-bold mb-6 text-center font-anta">Future Success Stories</h2>
+            <p class="text-center text-gray-600 max-w-3xl mx-auto mb-12 font-lexend">
+                Once we launch, this section will showcase real stories of how HandyFix has helped skilled workers find opportunities and customers find reliable service providers.
+            </p>
+            
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Story 1 -->
+                <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                    <div class="bg-gray-200 h-48 rounded-md mb-4 flex items-center justify-center">
+                        <i data-lucide="image" class="h-12 w-12 text-gray-400"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2 font-anta">Juan's Carpentry Journey</h3>
+                    <p class="text-gray-600 text-sm font-lexend">
+                        "After years of working odd carpentry jobs, HandyFix helped me build a steady client base. I now have consistent work and have even hired an apprentice."
+                    </p>
+                    <div class="mt-4 flex items-center">
+                        <div class="bg-gray-200 h-10 w-10 rounded-full mr-3"></div>
+                        <div>
+                            <p class="font-medium text-sm">Juan Dela Cruz</p>
+                            <p class="text-gray-500 text-xs">Carpenter, Laoag City</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Story 2 -->
+                <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                    <div class="bg-gray-200 h-48 rounded-md mb-4 flex items-center justify-center">
+                        <i data-lucide="image" class="h-12 w-12 text-gray-400"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2 font-anta">Maria's Electrical Expertise</h3>
+                    <p class="text-gray-600 text-sm font-lexend">
+                        "As a woman in a male-dominated field, finding work was challenging. HandyFix gave me a platform to showcase my skills and now I'm booked weeks in advance."
+                    </p>
+                    <div class="mt-4 flex items-center">
+                        <div class="bg-gray-200 h-10 w-10 rounded-full mr-3"></div>
+                        <div>
+                            <p class="font-medium text-sm">Maria Santos</p>
+                            <p class="text-gray-500 text-xs">Electrician, Batac</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Story 3 -->
+                <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                    <div class="bg-gray-200 h-48 rounded-md mb-4 flex items-center justify-center">
+                        <i data-lucide="image" class="h-12 w-12 text-gray-400"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2 font-anta">The Rodriguez Family</h3>
+                    <p class="text-gray-600 text-sm font-lexend">
+                        "Finding reliable home service providers used to be a challenge. With HandyFix, we've found trustworthy professionals for all our home maintenance needs."
+                    </p>
+                    <div class="mt-4 flex items-center">
+                        <div class="bg-gray-200 h-10 w-10 rounded-full mr-3"></div>
+                        <div>
+                            <p class="font-medium text-sm">Rodriguez Family</p>
+                            <p class="text-gray-500 text-xs">Homeowners, San Nicolas</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Community Impact -->
+    <section class="py-12 md:py-16 px-4 bg-primary text-white">
+        <div class="container mx-auto max-w-6xl">
+            <h2 class="text-2xl md:text-3xl font-bold mb-8 text-center font-anta">Community Impact</h2>
+            
+            <div class="grid md:grid-cols-3 gap-6 md:gap-8">
+                <!-- Economic Growth -->
+                <div class="bg-white/10 p-6 rounded-lg">
+                    <div class="bg-white/20 p-3 rounded-full w-14 h-14 flex items-center justify-center mb-4">
+                        <i data-lucide="trending-up" class="h-7 w-7"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 font-anta">Economic Growth</h3>
+                    <p class="text-white/90 font-lexend">
+                        By creating income opportunities for skilled individuals, HandyFix contributes to local economic development and reduces unemployment in Ilocos Norte.
+                    </p>
+                </div>
+                
+                <!-- Skill Preservation -->
+                <div class="bg-white/10 p-6 rounded-lg">
+                    <div class="bg-white/20 p-3 rounded-full w-14 h-14 flex items-center justify-center mb-4">
+                        <i data-lucide="award" class="h-7 w-7"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 font-anta">Skill Preservation</h3>
+                    <p class="text-white/90 font-lexend">
+                        We help preserve traditional crafts and skills by creating a marketplace where these abilities are valued and can be passed on to the next generation.
+                    </p>
+                </div>
+                
+                <!-- Community Building -->
+                <div class="bg-white/10 p-6 rounded-lg">
+                    <div class="bg-white/20 p-3 rounded-full w-14 h-14 flex items-center justify-center mb-4">
+                        <i data-lucide="users" class="h-7 w-7"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 font-anta">Community Building</h3>
+                    <p class="text-white/90 font-lexend">
+                        HandyFix strengthens community bonds by connecting neighbors and fostering trust between local service providers and customers.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Join the Movement -->
+    <section class="py-12 md:py-16 px-4">
+        <div class="container mx-auto max-w-6xl">
+            <div class="bg-zinc-100 p-8 md:p-12 rounded-lg">
+                <div class="max-w-3xl mx-auto text-center">
+                    <h2 class="text-2xl md:text-3xl font-bold mb-4 font-anta">Join the HandyFix Movement</h2>
+                    <p class="text-gray-700 mb-8 font-lexend">
+                        Whether you're a skilled worker looking for opportunities or a customer seeking reliable home services, HandyFix is building a platform for you. Sign up to be notified when we launch.
+                    </p>
+                    
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a href="index.html#newsletter" class="btn btn-primary py-3 px-6 font-poppins">
+                            Get Notified at Launch
+                        </a>
+                        <a href="index.html" class="btn btn-outline-primary py-3 px-6 font-poppins">
+                            Back to Home
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white">
+        <div class="container mx-auto max-w-6xl px-4 py-10 md:py-12">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="font-bold text-xl mb-4 font-anta">HandyFix</h3>
+                    <p class="text-gray-400 mb-4 text-sm md:text-base font-lexend">
+                        Connecting skilled service providers with customers across Ilocos Norte.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="404.html" class="text-gray-400 hover:text-white transition-colors">
+                            <i data-lucide="facebook" class="h-5 w-5"></i>
+                        </a>
+                        <a href="404.html" class="text-gray-400 hover:text-white transition-colors">
+                            <i data-lucide="instagram" class="h-5 w-5"></i>
+                        </a>
+                        <a href="404.html" class="text-gray-400 hover:text-white transition-colors">
+                            <i data-lucide="twitter" class="h-5 w-5"></i>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-lg mb-3 md:mb-4 font-anta">For Customers</h4>
+                    <ul class="space-y-2 text-sm md:text-base font-lexend">
+                        <li>
+                            <a href="404.html" class="text-gray-400 hover:text-white transition-colors">
+                                Find a Service Provider
+                            </a>
+                        </li>
+                        <li>
+                            <a href="404.html" class="text-gray-400 hover:text-white transition-colors">
+                                Post a Job
+                            </a>
+                        </li>
+                        <li>
+                            <a href="404.html" class="text-gray-400 hover:text-white transition-colors">
+                                How It Works
+                            </a>
+                        </li>
+                        <li>
+                            <a href="404.html" class="text-gray-400 hover:text-white transition-colors">
+                                Customer Support
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-lg mb-3 md:mb-4 font-anta">For Service Providers</h4>
+                    <ul class="space-y-2 text-sm md:text-base font-lexend">
+                        <li>
+                            <a href="404.html" class="text-gray-400 hover:text-white transition-colors">
+                                Join as a Provider
+                            </a>
+                        </li>
+                        <li>
+                            <a href="404.html" class="text-gray-400 hover:text-white transition-colors">
+                                Find Jobs
+                            </a>
+                        </li>
+                        <li>
+                            <a href="404.html" class="text-gray-400 hover:text-white transition-colors">
+                                Build Your Profile
+                            </a>
+                        </li>
+                        <li>
+                            <a href="404.html" class="text-gray-400 hover:text-white transition-colors">
+                                Provider Resources
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-lg mb-3 md:mb-4 font-anta">Company</h4>
+                    <ul class="space-y-2 text-sm md:text-base font-lexend">
+                        <li>
+                            <a href="404.html" class="text-gray-400 hover:text-white transition-colors">
+                                About Us
+                            </a>
+                        </li>
+                        <li>
+                            <a href="mission-vision.html" class="text-gray-400 hover:text-white transition-colors">
+                                Mission & Vision
+                            </a>
+                        </li>
+                        <li>
+                            <a href="404.html" class="text-gray-400 hover:text-white transition-colors">
+                                Privacy Policy
+                            </a>
+                        </li>
+                        <li>
+                            <a href="404.html" class="text-gray-400 hover:text-white transition-colors">
+                                Terms of Service
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 md:mt-10 pt-6 text-center text-gray-400 text-sm font-lexend">
+                <p>&copy; 2025 HandyFix Ilocos Norte. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+        
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuIcon = this.querySelector('[data-lucide]');
+            
+            if (mobileMenu.classList.contains('hidden')) {
+                mobileMenu.classList.remove('hidden');
+                menuIcon.setAttribute('name', 'x');
+            } else {
+                mobileMenu.classList.add('hidden');
+                menuIcon.setAttribute('name', 'menu');
+            }
+            
+            // Re-initialize icons after changing the attribute
+            lucide.createIcons();
+        });
+    </script>
+</body>
+</html>
