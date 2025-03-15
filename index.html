@@ -106,6 +106,61 @@
             background-color: #F88820;
             color: white;
         }
+
+        /* Add to existing styles */
+        .nav-item {
+            white-space: nowrap;
+            padding: 0.5rem 1rem;
+        }
+
+        .nav-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            line-height: 1.2;
+            max-width: 800px;
+            margin-bottom: 1.5rem;
+        }
+
+        @media (max-width: 1024px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+        }
+
+        /* Adjust navigation spacing */
+        .desktop-nav {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .desktop-nav a {
+            white-space: nowrap;
+            font-size: 0.9375rem;
+        }
+
+        /* Language toggle adjustments */
+        .lang-toggle-container {
+            display: flex;
+            align-items: center;
+            margin-left: 1rem;
+        }
+
+        .lang-toggle {
+            padding: 0.25rem 0.75rem;
+            font-size: 0.875rem;
+        }
     </style>
 </head>
 <body class="min-h-screen bg-zinc-50">
@@ -122,17 +177,17 @@
                 </a>
 
                 <!-- Desktop Navigation -->
-                <nav class="hidden md:flex space-x-6 lg:space-x-8">
-                    <a href="#" class="text-gray-700 hover:text-primary font-medium font-lexend" data-translate="services">
+                <nav class="hidden md:flex desktop-nav">
+                    <a href="#" class="text-gray-700 hover:text-primary font-medium font-lexend nav-item" data-translate="services">
                         Services
                     </a>
-                    <a href="#" class="text-gray-700 hover:text-primary font-medium font-lexend" data-translate="findFixers">
+                    <a href="#" class="text-gray-700 hover:text-primary font-medium font-lexend nav-item" data-translate="findFixers">
                         Find Fixers
                     </a>
-                    <a href="#" class="text-gray-700 hover:text-primary font-medium font-lexend" data-translate="postJob">
+                    <a href="#" class="text-gray-700 hover:text-primary font-medium font-lexend nav-item" data-translate="postJob">
                         Post a Job
                     </a>
-                    <a href="#" class="text-gray-700 hover:text-primary font-medium font-lexend" data-translate="howItWorks">
+                    <a href="#" class="text-gray-700 hover:text-primary font-medium font-lexend nav-item" data-translate="howItWorks">
                         How It Works
                     </a>
                 </nav>
@@ -140,9 +195,11 @@
                 <!-- Auth Buttons - Desktop -->
                 <div class="hidden md:flex items-center space-x-3 lg:space-x-4">
                     <!-- Language Switcher - Desktop -->
-                    <div class="flex border rounded-md overflow-hidden">
-                        <button id="en-btn" class="lang-toggle px-2 py-1 text-sm font-medium">EN</button>
-                        <button id="tl-btn" class="lang-toggle px-2 py-1 text-sm font-medium">TL</button>
+                    <div class="hidden md:flex items-center lang-toggle-container">
+                        <div class="flex border rounded-md overflow-hidden">
+                            <button id="en-btn" class="lang-toggle">EN</button>
+                            <button id="tl-btn" class="lang-toggle">TL</button>
+                        </div>
                     </div>
                     
                     <a href="#" class="btn btn-outline btn-outline-primary px-4 py-2 text-sm font-lexend" data-translate="login">
@@ -206,7 +263,7 @@
         <div class="absolute inset-0 bg-[url('https://ff6miz3krrdkxd1y.public.blob.vercel-storage.com/5288971104_d6b6d165ef_z-e80Zg9E1nZhipRDpD0lNNoKSSGjWtT.jpg')] opacity-10 bg-cover bg-center"></div>
         <div class="container mx-auto max-w-6xl relative z-10">
             <div class="max-w-2xl">
-                <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold font-anta mb-4 md:mb-6" data-translate="heroTitle">
+                <h1 class="hero-title font-bold font-anta text-white" data-translate="heroTitle">
                     Find Skilled Fixers In Ilocos Norte
                 </h1>
                 <p class="text-base md:text-lg lg:text-xl mb-6 md:mb-8 font-lexend" data-translate="heroSubtitle">
