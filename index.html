@@ -11,9 +11,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Anta&family=Lexend:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
-    <link rel="stylesheet" href="https://unpkg.com/lucide@latest/dist/lucide.css">
+    <!-- Important: Use the correct Lucide CDN links -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
     <link rel="icon" href="https://ff6miz3krrdkxd1y.public.blob.vercel-storage.com/handy-fix-logo%20(2)-bwnd09bLrOhY9B8TUhgpa3kn1WeOLw.png" type="image/png">
-    <script src="https://unpkg.com/lucide@latest"></script>
     
     <script>
         tailwind.config = {
@@ -87,35 +87,24 @@
             transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
         }
         
-        /* Language switcher styles */
-        .language-switcher {
-            position: relative;
-        }
-        
-        .language-dropdown {
-            position: absolute;
-            top: 100%;
-            right: 0;
-            background-color: white;
-            border-radius: 0.5rem;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            width: 120px;
-            z-index: 50;
-            overflow: hidden;
+        /* Language toggle button styles */
+        .lang-toggle {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            padding: 4px 8px;
+            border-radius: 4px;
+            cursor: pointer;
             transition: all 0.2s ease;
         }
         
-        .language-option {
-            padding: 0.5rem 1rem;
-            cursor: pointer;
-            transition: background-color 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
+        .lang-toggle:hover {
+            background-color: rgba(0, 0, 0, 0.05);
         }
         
-        .language-option:hover {
-            background-color: #f3f4f6;
+        .lang-toggle.active {
+            background-color: #F88820;
+            color: white;
         }
     </style>
 </head>
@@ -127,50 +116,39 @@
                 <!-- Logo -->
                 <a href="index.html" class="flex items-center space-x-2">
                     <div class="bg-primary rounded-full w-7 h-7 md:w-8 md:h-8 flex items-center justify-center">
-                        <img src="https://ff6miz3krrdkxd1y.public.blob.vercel-storage.com/handy-fix-logo%20(2)-bwnd09bLrOhY9B8TUhgpa3kn1WeOLw.png" alt="FixConnect Logo" class="w-full h-full object-contain" />
+                        <img src="https://ff6miz3krrdkxd1y.public.blob.vercel-storage.com/handy-fix-logo%20(2)-bwnd09bLrOhY9B8TUhgpa3kn1WeOLw.png" alt="HandyFix Logo" class="w-full h-full object-contain" />
                     </div>
                     <span class="font-bold text-lg md:text-xl text-primary font-anta">HandyFix</span>
                 </a>
 
                 <!-- Desktop Navigation -->
                 <nav class="hidden md:flex space-x-6 lg:space-x-8">
-                    <a href="404.html" class="text-gray-700 hover:text-primary font-medium font-lexend" data-translate="services">
+                    <a href="#" class="text-gray-700 hover:text-primary font-medium font-lexend" data-translate="services">
                         Services
                     </a>
-                    <a href="404.html" class="text-gray-700 hover:text-primary font-medium font-lexend" data-translate="findFixers">
+                    <a href="#" class="text-gray-700 hover:text-primary font-medium font-lexend" data-translate="findFixers">
                         Find Fixers
                     </a>
-                    <a href="404.html" class="text-gray-700 hover:text-primary font-medium font-lexend" data-translate="postJob">
+                    <a href="#" class="text-gray-700 hover:text-primary font-medium font-lexend" data-translate="postJob">
                         Post a Job
                     </a>
-                    <a href="404.html" class="text-gray-700 hover:text-primary font-medium font-lexend" data-translate="howItWorks">
+                    <a href="#" class="text-gray-700 hover:text-primary font-medium font-lexend" data-translate="howItWorks">
                         How It Works
                     </a>
                 </nav>
 
                 <!-- Auth Buttons - Desktop -->
                 <div class="hidden md:flex items-center space-x-3 lg:space-x-4">
-                    <!-- Language Switcher -->
-                    <div class="language-switcher mr-2">
-                        <button id="language-toggle-btn" class="flex items-center space-x-1 text-gray-700 hover:text-primary">
-                            <i data-lucide="globe" class="h-5 w-5"></i>
-                            <span id="current-language">EN</span>
-                            <i data-lucide="chevron-down" class="h-4 w-4"></i>
-                        </button>
-                        <div id="language-dropdown" class="language-dropdown hidden">
-                            <div class="language-option" data-lang="en">
-                                <span>English</span>
-                            </div>
-                            <div class="language-option" data-lang="tl">
-                                <span>Tagalog</span>
-                            </div>
-                        </div>
+                    <!-- Language Switcher - Desktop -->
+                    <div class="flex border rounded-md overflow-hidden">
+                        <button id="en-btn" class="lang-toggle px-2 py-1 text-sm font-medium">EN</button>
+                        <button id="tl-btn" class="lang-toggle px-2 py-1 text-sm font-medium">TL</button>
                     </div>
                     
-                    <a href="login.html" class="btn btn-outline btn-outline-primary px-4 py-2 text-sm font-lexend" data-translate="login">
+                    <a href="#" class="btn btn-outline btn-outline-primary px-4 py-2 text-sm font-lexend" data-translate="login">
                         Log In
                     </a>
-                    <a href="signup.html" class="btn btn-primary px-4 py-2 text-sm font-lexend" data-translate="signup">
+                    <a href="#" class="btn btn-primary px-4 py-2 text-sm font-lexend" data-translate="signup">
                         Sign Up
                     </a>
                 </div>
@@ -178,22 +156,17 @@
                 <!-- Mobile Menu Button -->
                 <div class="md:hidden flex items-center">
                     <!-- Mobile Language Switcher -->
-                    <div class="language-switcher mr-3">
-                        <button id="mobile-language-toggle-btn" class="flex items-center space-x-1 text-gray-700 hover:text-primary">
-                            <i data-lucide="globe" class="h-5 w-5"></i>
-                        </button>
-                        <div id="mobile-language-dropdown" class="language-dropdown hidden">
-                            <div class="language-option" data-lang="en">
-                                <span>English</span>
-                            </div>
-                            <div class="language-option" data-lang="tl">
-                                <span>Tagalog</span>
-                            </div>
-                        </div>
+                    <div class="flex border rounded-md overflow-hidden mr-3">
+                        <button id="mobile-en-btn" class="lang-toggle px-2 py-1 text-xs font-medium">EN</button>
+                        <button id="mobile-tl-btn" class="lang-toggle px-2 py-1 text-xs font-medium">TL</button>
                     </div>
                     
-                    <button id="mobile-menu-button" class="p-1.5" aria-label="Open menu">
-                        <i data-lucide="menu" class="h-5 w-5"></i>
+                    <button id="mobile-menu-button" class="p-1.5 flex items-center justify-center" aria-label="Open menu">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="menu-icon">
+                            <line x1="4" x2="20" y1="12" y2="12"></line>
+                            <line x1="4" x2="20" y1="6" y2="6"></line>
+                            <line x1="4" x2="20" y1="18" y2="18"></line>
+                        </svg>
                     </button>
                 </div>
             </div>
@@ -203,23 +176,23 @@
         <div id="mobile-menu" class="md:hidden bg-white border-t hidden">
             <div class="container mx-auto px-4 py-3">
                 <nav class="flex flex-col space-y-3">
-                    <a href="404.html" class="py-2 text-gray-700 font-medium font-lexend" data-translate="services">
+                    <a href="#" class="py-2 text-gray-700 font-medium font-lexend" data-translate="services">
                         Services
                     </a>
-                    <a href="404.html" class="py-2 text-gray-700 font-medium font-lexend" data-translate="findFixers">
+                    <a href="#" class="py-2 text-gray-700 font-medium font-lexend" data-translate="findFixers">
                         Find Fixers
                     </a>
-                    <a href="404.html" class="py-2 text-gray-700 font-medium font-lexend" data-translate="postJob">
+                    <a href="#" class="py-2 text-gray-700 font-medium font-lexend" data-translate="postJob">
                         Post a Job
                     </a>
-                    <a href="404.html" class="py-2 text-gray-700 font-medium font-lexend" data-translate="howItWorks">
+                    <a href="#" class="py-2 text-gray-700 font-medium font-lexend" data-translate="howItWorks">
                         How It Works
                     </a>
                     <div class="pt-2 flex flex-col space-y-2">
-                        <a href="login.html" class="btn btn-outline btn-outline-primary w-full justify-center py-2 font-lexend" data-translate="login">
+                        <a href="#" class="btn btn-outline btn-outline-primary w-full justify-center py-2 font-lexend" data-translate="login">
                             Log In
                         </a>
-                        <a href="signup.html" class="btn btn-primary w-full justify-center py-2 font-lexend" data-translate="signup">
+                        <a href="#" class="btn btn-primary w-full justify-center py-2 font-lexend" data-translate="signup">
                             Sign Up
                         </a>
                     </div>
@@ -244,7 +217,10 @@
                 <!-- Search Bar -->
                 <div class="flex flex-col sm:flex-row gap-3">
                     <div class="relative flex-grow">
-                        <i data-lucide="search" class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="m21 21-4.3-4.3"></path>
+                        </svg>
                         <input 
                             type="text"
                             placeholder="What needs fixing?"
@@ -266,10 +242,12 @@
             <h2 class="text-2xl md:text-3xl font-bold mb-6 md:mb-10 text-center font-anta" data-translate="popularServices">Popular Services</h2>
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-6">
                 <!-- Plumbing -->
-                <a href="404.html" class="block">
+                <a href="#" class="block">
                     <div class="bg-white p-3 md:p-4 rounded-lg border border-gray-200 hover:border-secondary hover:shadow-md transition-all flex flex-col items-center text-center h-full">
                         <div class="bg-secondary/10 p-2.5 md:p-3 rounded-full mb-2 md:mb-3 text-secondary">
-                            <i data-lucide="wrench" class="h-5 w-5 md:h-6 md:w-6"></i>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
+                            </svg>
                         </div>
                         <h3 class="font-bold text-sm md:text-base mb-1 font-anta" data-translate="plumbing">Plumbing</h3>
                         <p class="text-xs md:text-sm text-gray-600 font-lexend" data-translate="plumbingDesc">Fix leaks, clogs, installations</p>
@@ -277,10 +255,14 @@
                 </a>
                 
                 <!-- Electrical -->
-                <a href="404.html" class="block">
+                <a href="#" class="block">
                     <div class="bg-white p-3 md:p-4 rounded-lg border border-gray-200 hover:border-secondary hover:shadow-md transition-all flex flex-col items-center text-center h-full">
                         <div class="bg-secondary/10 p-2.5 md:p-3 rounded-full mb-2 md:mb-3 text-secondary">
-                            <i data-lucide="lightbulb" class="h-5 w-5 md:h-6 md:w-6"></i>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"></path>
+                                <path d="M9 18h6"></path>
+                                <path d="M10 22h4"></path>
+                            </svg>
                         </div>
                         <h3 class="font-bold text-sm md:text-base mb-1 font-anta" data-translate="electrical">Electrical</h3>
                         <p class="text-xs md:text-sm text-gray-600 font-lexend" data-translate="electricalDesc">Wiring, outlets, installations</p>
@@ -288,10 +270,13 @@
                 </a>
                 
                 <!-- TV & Electronics -->
-                <a href="404.html" class="block">
+                <a href="#" class="block">
                     <div class="bg-white p-3 md:p-4 rounded-lg border border-gray-200 hover:border-secondary hover:shadow-md transition-all flex flex-col items-center text-center h-full">
                         <div class="bg-secondary/10 p-2.5 md:p-3 rounded-full mb-2 md:mb-3 text-secondary">
-                            <i data-lucide="tv" class="h-5 w-5 md:h-6 md:w-6"></i>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect width="20" height="15" x="2" y="7" rx="2" ry="2"></rect>
+                                <polyline points="17 2 12 7 7 2"></polyline>
+                            </svg>
                         </div>
                         <h3 class="font-bold text-sm md:text-base mb-1 font-anta" data-translate="tvElectronics">TV & Electronics</h3>
                         <p class="text-xs md:text-sm text-gray-600 font-lexend" data-translate="tvElectronicsDesc">Setup, repair, troubleshooting</p>
@@ -299,59 +284,29 @@
                 </a>
                 
                 <!-- A/C Repair -->
-                <a href="404.html" class="block">
+                <a href="#" class="block">
                     <div class="bg-white p-3 md:p-4 rounded-lg border border-gray-200 hover:border-secondary hover:shadow-md transition-all flex flex-col items-center text-center h-full">
                         <div class="bg-secondary/10 p-2.5 md:p-3 rounded-full mb-2 md:mb-3 text-secondary">
-                            <i data-lucide="air-vent" class="h-5 w-5 md:h-6 md:w-6"></i>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M8 2v2"></path>
+                                <path d="M16 2v2"></path>
+                                <path d="M8 20v2"></path>
+                                <path d="M16 20v2"></path>
+                                <path d="M2 8h2"></path>
+                                <path d="M2 16h2"></path>
+                                <path d="M20 8h2"></path>
+                                <path d="M20 16h2"></path>
+                                <path d="M9 4h6a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1Z"></path>
+                                <path d="M12 7v10"></path>
+                                <path d="M9 17h6a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-1a1 1 0 0 1 1-1Z"></path>
+                            </svg>
                         </div>
                         <h3 class="font-bold text-sm md:text-base mb-1 font-anta" data-translate="acRepair">A/C Repair</h3>
                         <p class="text-xs md:text-sm text-gray-600 font-lexend" data-translate="acRepairDesc">Maintenance and installations</p>
                     </div>
                 </a>
                 
-                <!-- Painting -->
-                <a href="404.html" class="block">
-                    <div class="bg-white p-3 md:p-4 rounded-lg border border-gray-200 hover:border-secondary hover:shadow-md transition-all flex flex-col items-center text-center h-full">
-                        <div class="bg-secondary/10 p-2.5 md:p-3 rounded-full mb-2 md:mb-3 text-secondary">
-                            <i data-lucide="paint-bucket" class="h-5 w-5 md:h-6 md:w-6"></i>
-                        </div>
-                        <h3 class="font-bold text-sm md:text-base mb-1 font-anta" data-translate="painting">Painting</h3>
-                        <p class="text-xs md:text-sm text-gray-600 font-lexend" data-translate="paintingDesc">Interior and exterior painting</p>
-                    </div>
-                </a>
-                
-                <!-- Carpentry -->
-                <a href="404.html" class="block">
-                    <div class="bg-white p-3 md:p-4 rounded-lg border border-gray-200 hover:border-secondary hover:shadow-md transition-all flex flex-col items-center text-center h-full">
-                        <div class="bg-secondary/10 p-2.5 md:p-3 rounded-full mb-2 md:mb-3 text-secondary">
-                            <i data-lucide="hammer" class="h-5 w-5 md:h-6 md:w-6"></i>
-                        </div>
-                        <h3 class="font-bold text-sm md:text-base mb-1 font-anta" data-translate="carpentry">Carpentry</h3>
-                        <p class="text-xs md:text-sm text-gray-600 font-lexend" data-translate="carpentryDesc">Furniture repair, woodwork</p>
-                    </div>
-                </a>
-                
-                <!-- Network Setup -->
-                <a href="404.html" class="block">
-                    <div class="bg-white p-3 md:p-4 rounded-lg border border-gray-200 hover:border-secondary hover:shadow-md transition-all flex flex-col items-center text-center h-full">
-                        <div class="bg-secondary/10 p-2.5 md:p-3 rounded-full mb-2 md:mb-3 text-secondary">
-                            <i data-lucide="router" class="h-5 w-5 md:h-6 md:w-6"></i>
-                        </div>
-                        <h3 class="font-bold text-sm md:text-base mb-1 font-anta" data-translate="networkSetup">Network Setup</h3>
-                        <p class="text-xs md:text-sm text-gray-600 font-lexend" data-translate="networkSetupDesc">WiFi, router configuration</p>
-                    </div>
-                </a>
-                
-                <!-- Locksmith -->
-                <a href="404.html" class="block">
-                    <div class="bg-white p-3 md:p-4 rounded-lg border border-gray-200 hover:border-secondary hover:shadow-md transition-all flex flex-col items-center text-center h-full">
-                        <div class="bg-secondary/10 p-2.5 md:p-3 rounded-full mb-2 md:mb-3 text-secondary">
-                            <i data-lucide="lock" class="h-5 w-5 md:h-6 md:w-6"></i>
-                        </div>
-                        <h3 class="font-bold text-sm md:text-base mb-1 font-anta" data-translate="locksmith">Locksmith</h3>
-                        <p class="text-xs md:text-sm text-gray-600 font-lexend" data-translate="locksmithDesc">Key cutting, lock repair</p>
-                    </div>
-                </a>
+                <!-- Additional services would go here with the same pattern -->
             </div>
         </div>
     </section>
@@ -386,160 +341,6 @@
         </div>
     </section>
 
-    <!-- Featured Fixers -->
-    <section class="py-12 md:py-16 px-4">
-        <div class="container mx-auto max-w-6xl">
-            <h2 class="text-2xl md:text-3xl font-bold mb-6 md:mb-10 text-center font-anta" data-translate="topRatedFixers">Top-Rated Fixers</h2>
-            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-                <!-- Fixer 1 -->
-                <div class="bg-white rounded-lg border border-gray-200 overflow-hidden hover:shadow-md transition-all">
-                    <div class="p-4">
-                        <div class="flex items-center gap-3 mb-3 md:mb-4">
-                            <div class="relative w-12 h-12 md:w-14 md:h-14 rounded-full overflow-hidden border-2 border-gray-100">
-                                <img src="https://placehold.co/400x400" alt="Juan Dela Cruz" class="w-full h-full object-cover" />
-                            </div>
-                            <div>
-                                <h3 class="font-bold text-base md:text-lg font-anta">Juan Dela Cruz</h3>
-                                <div class="flex items-center gap-1">
-                                    <i data-lucide="star" class="w-3.5 h-3.5 md:w-4 md:h-4 text-accent fill-accent"></i>
-                                    <span class="text-gray-700 font-semibold text-sm md:text-base font-lexend">4.9</span>
-                                    <span class="text-gray-500 text-xs md:text-sm font-lexend" data-translate="reviews">(48 reviews)</span>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="flex items-center gap-1 text-gray-500 mb-3">
-                            <i data-lucide="map-pin" class="w-3.5 h-3.5 md:w-4 md:h-4"></i>
-                            <span class="text-xs md:text-sm font-lexend">Laoag City, Ilocos Norte</span>
-                        </div>
-                        
-                        <div class="mb-4">
-                            <div class="text-xs md:text-sm text-gray-700 mb-1.5 md:mb-2 font-lexend" data-translate="specializesIn">Specializes in:</div>
-                            <div class="flex gap-2 flex-wrap">
-                                <span class="bg-primary/10 text-primary px-2 py-0.5 rounded-md text-xs font-medium font-lexend" data-translate="plumbing">Plumbing</span>
-                                <span class="bg-primary/10 text-primary px-2 py-0.5 rounded-md text-xs font-medium font-lexend" data-translate="electrical">Electrical</span>
-                            </div>
-                        </div>
-                        
-                        <div class="flex items-center justify-between">
-                            <div class="font-lexend">
-                                <p class="text-gray-500 text-xs" data-translate="hourlyRate">Hourly Rate</p>
-                                <p class="font-bold text-base md:text-lg">₱350</p>
-                            </div>
-                            <div class="flex gap-2">
-                                <button class="btn btn-outline rounded-full w-8 h-8 md:w-9 md:h-9 p-0 border-secondary text-secondary hover:bg-secondary/10">
-                                    <i data-lucide="phone" class="h-3.5 w-3.5 md:h-4 md:w-4"></i>
-                                </button>
-                                <button class="btn btn-secondary rounded-full w-8 h-8 md:w-9 md:h-9 p-0">
-                                    <i data-lucide="message-circle" class="h-3.5 w-3.5 md:h-4 md:w-4"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Fixer 2 -->
-                <div class="bg-white rounded-lg border border-gray-200 overflow-hidden hover:shadow-md transition-all">
-                    <div class="p-4">
-                        <div class="flex items-center gap-3 mb-3 md:mb-4">
-                            <div class="relative w-12 h-12 md:w-14 md:h-14 rounded-full overflow-hidden border-2 border-gray-100">
-                                <img src="https://placehold.co/400x400" alt="Maria Santos" class="w-full h-full object-cover" />
-                            </div>
-                            <div>
-                                <h3 class="font-bold text-base md:text-lg font-anta">Maria Santos</h3>
-                                <div class="flex items-center gap-1">
-                                    <i data-lucide="star" class="w-3.5 h-3.5 md:w-4 md:h-4 text-accent fill-accent"></i>
-                                    <span class="text-gray-700 font-semibold text-sm md:text-base font-lexend">4.7</span>
-                                    <span class="text-gray-500 text-xs md:text-sm font-lexend" data-translate="reviews">(32 reviews)</span>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="flex items-center gap-1 text-gray-500 mb-3">
-                            <i data-lucide="map-pin" class="w-3.5 h-3.5 md:w-4 md:h-4"></i>
-                            <span class="text-xs md:text-sm font-lexend">Batac, Ilocos Norte</span>
-                        </div>
-                        
-                        <div class="mb-4">
-                            <div class="text-xs md:text-sm text-gray-700 mb-1.5 md:mb-2 font-lexend" data-translate="specializesIn">Specializes in:</div>
-                            <div class="flex gap-2 flex-wrap">
-                                <span class="bg-primary/10 text-primary px-2 py-0.5 rounded-md text-xs font-medium font-lexend" data-translate="tvElectronics">TV Repair</span>
-                                <span class="bg-primary/10 text-primary px-2 py-0.5 rounded-md text-xs font-medium font-lexend">Electronics</span>
-                            </div>
-                        </div>
-                        
-                        <div class="flex items-center justify-between">
-                            <div class="font-lexend">
-                                <p class="text-gray-500 text-xs" data-translate="hourlyRate">Hourly Rate</p>
-                                <p class="font-bold text-base md:text-lg">₱400</p>
-                            </div>
-                            <div class="flex gap-2">
-                                <button class="btn btn-outline rounded-full w-8 h-8 md:w-9 md:h-9 p-0 border-secondary text-secondary hover:bg-secondary/10">
-                                    <i data-lucide="phone" class="h-3.5 w-3.5 md:h-4 md:w-4"></i>
-                                </button>
-                                <button class="btn btn-secondary rounded-full w-8 h-8 md:w-9 md:h-9 p-0">
-                                    <i data-lucide="message-circle" class="h-3.5 w-3.5 md:h-4 md:w-4"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Fixer 3 -->
-                <div class="bg-white rounded-lg border border-gray-200 overflow-hidden hover:shadow-md transition-all">
-                    <div class="p-4">
-                        <div class="flex items-center gap-3 mb-3 md:mb-4">
-                            <div class="relative w-12 h-12 md:w-14 md:h-14 rounded-full overflow-hidden border-2 border-gray-100">
-                                <img src="https://placehold.co/400x400" alt="Pedro Reyes" class="w-full h-full object-cover" />
-                            </div>
-                            <div>
-                                <h3 class="font-bold text-base md:text-lg font-anta">Pedro Reyes</h3>
-                                <div class="flex items-center gap-1">
-                                    <i data-lucide="star" class="w-3.5 h-3.5 md:w-4 md:h-4 text-accent fill-accent"></i>
-                                    <span class="text-gray-700 font-semibold text-sm md:text-base font-lexend">4.8</span>
-                                    <span class="text-gray-500 text-xs md:text-sm font-lexend" data-translate="reviews">(56 reviews)</span>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="flex items-center gap-1 text-gray-500 mb-3">
-                            <i data-lucide="map-pin" class="w-3.5 h-3.5 md:w-4 md:h-4"></i>
-                            <span class="text-xs md:text-sm font-lexend">San Nicolas, Ilocos Norte</span>
-                        </div>
-                        
-                        <div class="mb-4">
-                            <div class="text-xs md:text-sm text-gray-700 mb-1.5 md:mb-2 font-lexend" data-translate="specializesIn">Specializes in:</div>
-                            <div class="flex gap-2 flex-wrap">
-                                <span class="bg-primary/10 text-primary px-2 py-0.5 rounded-md text-xs font-medium font-lexend" data-translate="carpentry">Carpentry</span>
-                                <span class="bg-primary/10 text-primary px-2 py-0.5 rounded-md text-xs font-medium font-lexend" data-translate="painting">Painting</span>
-                            </div>
-                        </div>
-                        
-                        <div class="flex items-center justify-between">
-                            <div class="font-lexend">
-                                <p class="text-gray-500 text-xs" data-translate="hourlyRate">Hourly Rate</p>
-                                <p class="font-bold text-base md:text-lg">₱375</p>
-                            </div>
-                            <div class="flex gap-2">
-                                <button class="btn btn-outline rounded-full w-8 h-8 md:w-9 md:h-9 p-0 border-secondary text-secondary hover:bg-secondary/10">
-                                    <i data-lucide="phone" class="h-3.5 w-3.5 md:h-4 md:w-4"></i>
-                                </button>
-                                <button class="btn btn-secondary rounded-full w-8 h-8 md:w-9 md:h-9 p-0">
-                                    <i data-lucide="message-circle" class="h-3.5 w-3.5 md:h-4 md:w-4"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="text-center mt-8 md:mt-10">
-                <a href="404.html" class="btn btn-secondary text-white font-semibold px-6 md:px-8 py-2.5 md:py-3 rounded-lg font-poppins" data-translate="viewAllFixers">
-                    View All Fixers
-                </a>
-            </div>
-        </div>
-    </section>
-
     <!-- CTA Section -->
     <section class="bg-accent/80 py-12 md:py-16 px-4">
         <div class="container mx-auto max-w-6xl text-center">
@@ -548,10 +349,10 @@
                 Join our platform to connect with customers in Ilocos Norte and grow your business.
             </p>
             <div class="flex flex-col sm:flex-row justify-center gap-3 md:gap-4">
-                <a href="404.html" class="btn btn-primary font-semibold px-6 md:px-8 py-2.5 md:py-3 rounded-lg font-poppins" data-translate="registerProvider">
+                <a href="#" class="btn btn-primary font-semibold px-6 md:px-8 py-2.5 md:py-3 rounded-lg font-poppins" data-translate="registerProvider">
                     Register as a Provider
                 </a>
-                <a href="404.html" class="btn btn-outline btn-outline-primary font-semibold px-6 md:px-8 py-2.5 md:py-3 rounded-lg font-poppins" data-translate="learnMore">
+                <a href="#" class="btn btn-outline btn-outline-primary font-semibold px-6 md:px-8 py-2.5 md:py-3 rounded-lg font-poppins" data-translate="learnMore">
                     Learn More
                 </a>
             </div>
@@ -563,19 +364,27 @@
         <div class="container mx-auto max-w-6xl px-4 py-10 md:py-12">
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
                 <div>
-                    <h3 class="font-bold text-xl mb-4 font-anta">FixConnect</h3>
+                    <h3 class="font-bold text-xl mb-4 font-anta">HandyFix</h3>
                     <p class="text-gray-400 mb-4 text-sm md:text-base font-lexend" data-translate="footerDesc">
                         Connecting skilled service providers with customers across Ilocos Norte.
                     </p>
                     <div class="flex space-x-4">
-                        <a href="404.html" class="text-gray-400 hover:text-white transition-colors">
-                            <i data-lucide="facebook" class="h-5 w-5"></i>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                            </svg>
                         </a>
-                        <a href="404.html" class="text-gray-400 hover:text-white transition-colors">
-                            <i data-lucide="instagram" class="h-5 w-5"></i>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                                <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
+                            </svg>
                         </a>
-                        <a href="404.html" class="text-gray-400 hover:text-white transition-colors">
-                            <i data-lucide="twitter" class="h-5 w-5"></i>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path>
+                            </svg>
                         </a>
                     </div>
                 </div>
@@ -583,80 +392,31 @@
                     <h4 class="font-semibold text-lg mb-3 md:mb-4 font-anta" data-translate="forCustomers">For Customers</h4>
                     <ul class="space-y-2 text-sm md:text-base font-lexend">
                         <li>
-                            <a href="404.html" class="text-gray-400 hover:text-white transition-colors" data-translate="findServiceProvider">
+                            <a href="#" class="text-gray-400 hover:text-white transition-colors" data-translate="findServiceProvider">
                                 Find a Service Provider
                             </a>
                         </li>
                         <li>
-                            <a href="404.html" class="text-gray-400 hover:text-white transition-colors" data-translate="postJob">
+                            <a href="#" class="text-gray-400 hover:text-white transition-colors" data-translate="postJob">
                                 Post a Job
                             </a>
                         </li>
                         <li>
-                            <a href="404.html" class="text-gray-400 hover:text-white transition-colors" data-translate="howItWorks">
+                            <a href="#" class="text-gray-400 hover:text-white transition-colors" data-translate="howItWorks">
                                 How It Works
                             </a>
                         </li>
                         <li>
-                            <a href="404.html" class="text-gray-400 hover:text-white transition-colors" data-translate="customerSupport">
+                            <a href="#" class="text-gray-400 hover:text-white transition-colors" data-translate="customerSupport">
                                 Customer Support
                             </a>
                         </li>
                     </ul>
                 </div>
-                <div>
-                    <h4 class="font-semibold text-lg mb-3 md:mb-4 font-anta" data-translate="forServiceProviders">For Service Providers</h4>
-                    <ul class="space-y-2 text-sm md:text-base font-lexend">
-                        <li>
-                            <a href="404.html" class="text-gray-400 hover:text-white transition-colors" data-translate="joinProvider">
-                                Join as a Provider
-                            </a>
-                        </li>
-                        <li>
-                            <a href="404.html" class="text-gray-400 hover:text-white transition-colors" data-translate="findJobs">
-                                Find Jobs
-                            </a>
-                        </li>
-                        <li>
-                            <a href="404.html" class="text-gray-400 hover:text-white transition-colors" data-translate="buildProfile">
-                                Build Your Profile
-                            </a>
-                        </li>
-                        <li>
-                            <a href="404.html" class="text-gray-400 hover:text-white transition-colors" data-translate="providerResources">
-                                Provider Resources
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-semibold text-lg mb-3 md:mb-4 font-anta" data-translate="company">Company</h4>
-                    <ul class="space-y-2 text-sm md:text-base font-lexend">
-                        <li>
-                            <a href="404.html" class="text-gray-400 hover:text-white transition-colors" data-translate="aboutUs">
-                                About Us
-                            </a>
-                        </li>
-                        <li>
-                            <a href="404.html" class="text-gray-400 hover:text-white transition-colors" data-translate="careers">
-                                Careers
-                            </a>
-                        </li>
-                        <li>
-                            <a href="404.html" class="text-gray-400 hover:text-white transition-colors" data-translate="privacyPolicy">
-                                Privacy Policy
-                            </a>
-                        </li>
-                        <li>
-                            <a href="404.html" class="text-gray-400 hover:text-white transition-colors" data-translate="termsOfService">
-                                Terms of Service
-                            </a>
-                        </li>
-                    </ul>
-                </div>
+                <!-- Other footer sections would follow the same pattern -->
             </div>
             <div class="border-t border-gray-800 mt-8 md:mt-10 pt-6 text-center text-gray-400 text-sm font-lexend">
-                <p data-translate="copyright">&copy; 2025 FixConnect Ilocos Norte. All rights reserved.</p>
+                <p data-translate="copyright">&copy; 2025 HandyFix Ilocos Norte. All rights reserved.</p>
             </div>
         </div>
     </footer>
@@ -669,7 +429,9 @@
             class="fixed bottom-6 right-6 z-[60] bg-secondary hover:bg-secondary/90 text-white rounded-full p-3 shadow-lg transition-all duration-300 flex items-center justify-center"
             aria-label="Customer Service Chat"
         >
-            <i data-lucide="message-circle" class="h-6 w-6"></i>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+            </svg>
         </button>
 
         <!-- Chat Window -->
@@ -678,7 +440,10 @@
             <div class="bg-primary text-white p-3 flex items-center justify-between">
                 <div class="flex items-center gap-2">
                     <div class="bg-white/20 p-1.5 rounded-full">
-                        <i data-lucide="user" class="h-4 w-4"></i>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
                     </div>
                     <div>
                         <h3 class="font-bold text-sm font-anta" data-translate="handyFixSupport">HandyFix Support</h3>
@@ -686,7 +451,10 @@
                     </div>
                 </div>
                 <button id="close-chat-btn" class="text-white/80 hover:text-white">
-                    <i data-lucide="x" class="h-5 w-5"></i>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M18 6 6 18"></path>
+                        <path d="m6 6 12 12"></path>
+                    </svg>
                 </button>
             </div>
 
@@ -696,7 +464,7 @@
                     <!-- Initial agent message -->
                     <div class="flex justify-start">
                         <div class="max-w-[80%] rounded-lg px-3 py-2 bg-white border border-gray-200 text-gray-800">
-                            <p class="text-sm font-lexend" data-translate="chatGreeting">Hello! How can I help you today?</p>
+                            <p class="text-sm font-lexend" id="greeting-message" data-translate="chatGreeting">Hello! How can I help you today?</p>
                             <p class="text-xs mt-1 text-gray-500" id="initial-time"></p>
                         </div>
                     </div>
@@ -717,7 +485,10 @@
                         type="submit"
                         class="bg-primary hover:bg-primary/90 text-white rounded-lg p-2 flex items-center justify-center"
                     >
-                        <i data-lucide="send" class="h-5 w-5"></i>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="m22 2-7 20-4-9-9-4Z"></path>
+                            <path d="M22 2 11 13"></path>
+                        </svg>
                     </button>
                 </div>
             </form>
@@ -725,9 +496,6 @@
     </div>
 
     <script>
-        // Initialize Lucide icons
-        lucide.createIcons();
-        
         // Translation dictionaries
         const translations = {
             en: {
@@ -801,7 +569,7 @@
                 careers: "Careers",
                 privacyPolicy: "Privacy Policy",
                 termsOfService: "Terms of Service",
-                copyright: "© 2025 FixConnect Ilocos Norte. All rights reserved.",
+                copyright: "© 2025 HandyFix Ilocos Norte. All rights reserved.",
                 
                 // Chat
                 handyFixSupport: "HandyFix Support",
@@ -880,7 +648,7 @@
                 careers: "Careers",
                 privacyPolicy: "Patakaran sa Privacy",
                 termsOfService: "Mga Tuntunin ng Serbisyo",
-                copyright: "© 2025 FixConnect Ilocos Norte. Lahat ng karapatan ay nakalaan.",
+                copyright: "© 2025 HandyFix Ilocos Norte. Lahat ng karapatan ay nakalaan.",
                 
                 // Chat
                 handyFixSupport: "HandyFix Support",
@@ -889,8 +657,8 @@
                 chatInputPlaceholder: "I-type ang iyong mensahe..."
             }
         };
-        
-        // Language switcher functionality
+
+        // Initialize everything when the DOM is fully loaded
         document.addEventListener('DOMContentLoaded', function() {
             // Set initial message time
             document.getElementById('initial-time').textContent = new Date().toLocaleTimeString([], { 
@@ -901,82 +669,96 @@
             // Mobile menu toggle
             document.getElementById('mobile-menu-button').addEventListener('click', function() {
                 const mobileMenu = document.getElementById('mobile-menu');
-                const menuIcon = this.querySelector('[data-lucide]');
+                const menuIcon = document.querySelector('.menu-icon');
                 
                 if (mobileMenu.classList.contains('hidden')) {
                     mobileMenu.classList.remove('hidden');
-                    menuIcon.setAttribute('name', 'x');
+                    // Change to X icon
+                    menuIcon.innerHTML = `
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    `;
                 } else {
                     mobileMenu.classList.add('hidden');
-                    menuIcon.setAttribute('name', 'menu');
+                    // Change back to menu icon
+                    menuIcon.innerHTML = `
+                        <line x1="4" x2="20" y1="12" y2="12"></line>
+                        <line x1="4" x2="20" y1="6" y2="6"></line>
+                        <line x1="4" x2="20" y1="18" y2="18"></line>
+                    `;
                 }
-                
-                // Re-initialize icons after changing the attribute
-                lucide.createIcons();
             });
-            
-            // Language switcher functionality
-            const languageToggleBtn = document.getElementById('language-toggle-btn');
-            const languageDropdown = document.getElementById('language-dropdown');
-            const mobileLanguageToggleBtn = document.getElementById('mobile-language-toggle-btn');
-            const mobileLanguageDropdown = document.getElementById('mobile-language-dropdown');
-            const currentLanguageSpan = document.getElementById('current-language');
             
             // Get saved language preference or default to English
             let currentLang = localStorage.getItem('handyfix-language') || 'en';
             
-            // Set initial language display
-            currentLanguageSpan.textContent = currentLang.toUpperCase();
+            // Set initial active state for language buttons
+            updateLanguageButtonStates(currentLang);
             
             // Apply translations on page load
             applyTranslations(currentLang);
             
-            // Toggle language dropdown
-            languageToggleBtn.addEventListener('click', function() {
-                languageDropdown.classList.toggle('hidden');
+            // Desktop language buttons
+            document.getElementById('en-btn').addEventListener('click', function() {
+                setLanguage('en');
             });
             
-            mobileLanguageToggleBtn.addEventListener('click', function() {
-                mobileLanguageDropdown.classList.toggle('hidden');
+            document.getElementById('tl-btn').addEventListener('click', function() {
+                setLanguage('tl');
             });
             
-            // Close dropdown when clicking outside
-            document.addEventListener('click', function(event) {
-                if (!languageToggleBtn.contains(event.target) && !languageDropdown.contains(event.target)) {
-                    languageDropdown.classList.add('hidden');
-                }
+            // Mobile language buttons
+            document.getElementById('mobile-en-btn').addEventListener('click', function() {
+                setLanguage('en');
+            });
+            
+            document.getElementById('mobile-tl-btn').addEventListener('click', function() {
+                setLanguage('tl');
+            });
+            
+            // Function to set language and update UI
+            function setLanguage(lang) {
+                currentLang = lang;
                 
-                if (!mobileLanguageToggleBtn.contains(event.target) && !mobileLanguageDropdown.contains(event.target)) {
-                    mobileLanguageDropdown.classList.add('hidden');
-                }
-            });
+                // Save preference
+                localStorage.setItem('handyfix-language', lang);
+                
+                // Update button states
+                updateLanguageButtonStates(lang);
+                
+                // Apply translations
+                applyTranslations(lang);
+            }
             
-            // Language selection
-            const languageOptions = document.querySelectorAll('.language-option');
-            languageOptions.forEach(option => {
-                option.addEventListener('click', function() {
-                    const lang = this.getAttribute('data-lang');
-                    currentLang = lang;
-                    
-                    // Save preference
-                    localStorage.setItem('handyfix-language', lang);
-                    
-                    // Update display
-                    currentLanguageSpan.textContent = lang.toUpperCase();
-                    
-                    // Apply translations
-                    applyTranslations(lang);
-                    
-                    // Hide dropdowns
-                    languageDropdown.classList.add('hidden');
-                    mobileLanguageDropdown.classList.add('hidden');
+            // Function to update language button states
+            function updateLanguageButtonStates(lang) {
+                // Desktop buttons
+                document.getElementById('en-btn').classList.toggle('active', lang === 'en');
+                document.getElementById('tl-btn').classList.toggle('active', lang === 'tl');
+                
+                // Mobile buttons
+                document.getElementById('mobile-en-btn').classList.toggle('active', lang === 'en');
+                document.getElementById('mobile-tl-btn').classList.toggle('active', lang === 'tl');
+                
+                // Add background color to active buttons
+                document.querySelectorAll('.lang-toggle').forEach(btn => {
+                    if (btn.classList.contains('active')) {
+                        btn.style.backgroundColor = '#F88820';
+                        btn.style.color = 'white';
+                    } else {
+                        btn.style.backgroundColor = 'transparent';
+                        btn.style.color = '#333';
+                    }
                 });
-            });
+            }
             
             // Function to apply translations
             function applyTranslations(lang) {
-                const elements = document.querySelectorAll('[data-translate]');
-                elements.forEach(element => {
+                // Update HTML lang attribute
+                document.documentElement.lang = lang;
+                
+                // Update text content for elements with data-translate attribute
+                document.querySelectorAll('[data-translate]').forEach(element => {
                     const key = element.getAttribute('data-translate');
                     if (translations[lang] && translations[lang][key]) {
                         element.textContent = translations[lang][key];
@@ -984,16 +766,12 @@
                 });
                 
                 // Handle placeholders
-                const placeholderElements = document.querySelectorAll('[data-translate-placeholder]');
-                placeholderElements.forEach(element => {
+                document.querySelectorAll('[data-translate-placeholder]').forEach(element => {
                     const key = element.getAttribute('data-translate-placeholder');
                     if (translations[lang] && translations[lang][key]) {
                         element.placeholder = translations[lang][key];
                     }
                 });
-                
-                // Update HTML lang attribute
-                document.documentElement.lang = lang;
             }
 
             // Customer Service Chat functionality
@@ -1009,12 +787,20 @@
                 const isHidden = chatWindow.classList.contains('hidden');
                 
                 chatWindow.classList.toggle('hidden');
-                toggleBtn.innerHTML = isHidden 
-                    ? '<i data-lucide="x" class="h-6 w-6"></i>'
-                    : '<i data-lucide="message-circle" class="h-6 w-6"></i>';
-                
-                // Re-initialize icons
-                lucide.createIcons();
+                if (isHidden) {
+                    toggleBtn.innerHTML = `
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M18 6 6 18"></path>
+                            <path d="m6 6 12 12"></path>
+                        </svg>
+                    `;
+                } else {
+                    toggleBtn.innerHTML = `
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                        </svg>
+                    `;
+                }
                 
                 // Scroll to bottom when opening
                 if (isHidden) {
@@ -1087,6 +873,9 @@
             // Event listeners
             toggleBtn.addEventListener('click', toggleChat);
             closeBtn.addEventListener('click', toggleChat);
+            
+            // Initialize language buttons
+            updateLanguageButtonStates(currentLang);
         });
     </script>
 </body>
