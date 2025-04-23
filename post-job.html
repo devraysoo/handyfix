@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post a Job - HandyFix</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anta&family=Lexend:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://unpkg.com/lucide@latest/dist/lucide.css">
+    <link rel="icon" href="https://ff6miz3krrdkxd1y.public.blob.vercel-storage.com/handy-fix-logo%20(2)-bwnd09bLrOhY9B8TUhgpa3kn1WeOLw.png" type="image/png">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#601008',
+                        secondary: '#F88820',
+                        accent: '#ffce0a',
+                    },
+                    fontFamily: {
+                        anta: ['Anta', 'sans-serif'],
+                        lexend: ['Lexend', 'sans-serif'],
+                        poppins: ['Poppins', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            font-family: 'Lexend', sans-serif;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            transition-property: color, background-color, border-color;
+            transition-duration: 150ms;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .btn-primary {
+            background-color: #601008;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: rgba(96, 16, 8, 0.9);
+        }
+        
+        .btn-secondary {
+            background-color: #F88820;
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background-color: rgba(248, 136, 32, 0.9);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid;
+        }
+        
+        .btn-outline-primary {
+            border-color: #601008;
+            color: #601008;
+        }
+        
+        .btn-outline-primary:hover {
+            background-color: rgba(96, 16, 8, 0.1);
+        }
+
+        .chat-window {
+            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+        }
+
+        /* Mobile Menu Styles */
+        #mobile-menu {
+            transform: translateX(100%);
+            transition: transform 300ms ease-in-out;
+        }
+
+        #mobile-menu.open {
+            transform: translateX(0);
+        }
+
+        #mobile-menu-backdrop {
+            background: rgba(0, 0, 0, 0.5);
+            transition: opacity 300ms ease-in-out;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        #mobile-menu-backdrop.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* Updated Step Indicator Styles */
+        .step-container {
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .step-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .step-circle {
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            background-color: #e5e7eb; /* bg-gray-200 */
+            color: #6b7280; /* text-gray-500 */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .step-circle.active {
+            background-color: #601008; /* bg-primary */
+            color: white;
+        }
+
+        .step-label {
+            font-size: 0.75rem; /* text-xs */
+            margin-top: 0.25rem; /* mt-1 */
+            font-weight: 500; /* font-medium */
+            color: #6b7280; /* text-gray-500 */
+            transition: color 0.3s;
+        }
+
+        .step-label.active {
+            color: #601008; /* text-primary */
+        }
+
+        .step-line {
+            position: absolute;
+            top: 1rem; /* Center of the circle (circle height / 2) */
+            left: 0;
+            right: 0;
+            height: 2px;
+            background-color: #e5e7eb; /* bg-gray-200 */
+            z-index: 0;
+        }
+
+        .step-progress {
+            height: 100%;
+            background-color: #601008; /* bg-primary */
+            transition: width 0.3s ease-in-out;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-zinc-50">
+    <!-- Header -->
+    <header class="bg-white sticky top-0 z-50 shadow-sm">
+        <div class="container mx-auto max-w-6xl px-4">
+            <div class="flex items-center justify-between h-14 md:h-16">
+                <!-- Logo -->
+                <a href="index.html" class="flex items-center space-x-2">
+                    <div class="bg-primary rounded-full w-7 h-7 md:w-8 md:h-8 flex items-center justify-center">
+                        <img src="https://ff6miz3krrdkxd1y.public.blob.vercel-storage.com/handy-fix-logo%20(2)-bwnd09bLrOhY9B8TUhgpa3kn1WeOLw.png" alt="HandyFix Logo" class="w-full h-full object-contain" />
+                    </div>
+                    <span class="font-bold text-lg md:text-xl text-primary font-anta">HandyFix</span>
+                </a>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex space-x-6 lg:space-x-8">
+                    <a href="services.html" class="text-gray-700 hover:text-primary font-medium font-lexend">
+                        Services
+                    </a>
+                    <a href="find-handyman.html" class="text-gray-700 hover:text-primary font-medium font-lexend">
+                        Find Fixers
+                    </a>
+                    <a href="post-job.html" class="text-primary font-medium font-lexend border-b-2 border-primary">
+                        Post a Job
+                    </a>
+                    <a href="how-it-works.html" class="text-gray-700 hover:text-primary font-medium font-lexend">
+                        How It Works
+                    </a>
+                </nav>
+
+                <!-- Auth Buttons - Desktop -->
+                <div class="hidden md:flex items-center space-x-3 lg:space-x-4">
+                    <a href="login.html" class="btn btn-outline btn-outline-primary px-4 py-2 text-sm font-lexend">
+                        Log In
+                    </a>
+                    <a href="signup.html" class="btn btn-primary px-4 py-2 text-sm font-lexend">
+                        Sign Up
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-button" class="md:hidden p-1.5" aria-label="Open menu">
+                    <i data-lucide="menu" class="h-5 w-5"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu-backdrop" class="md:hidden fixed inset-0 z-40">
+        <div id="mobile-menu" class="fixed top-0 right-0 h-screen w-screen bg-primary text-white flex flex-col">
+            <div class="flex justify-end p-4">
+                <button id="mobile-menu-close" class="text-white">
+                    <i data-lucide="x" class="h-6 w-6"></i>
+                </button>
+            </div>
+            <nav class="flex flex-col items-center justify-center flex-1 space-y-6">
+                <a href="services.html" class="mobile-nav-link text-2xl font-bold text-white hover:text-secondary font-anta">
+                    Services
+                </a>
+                <a href="find-handyman.html" class="mobile-nav-link text-2xl font-bold text-white hover:text-secondary font-anta">
+                    Find Fixers
+                </a>
+                <a href="post-job.html" class="mobile-nav-link text-2xl font-bold text-white hover:text-secondary font-anta">
+                    Post a Job
+                </a>
+                <a href="how-it-works.html" class="mobile-nav-link text-2xl font-bold text-white hover:text-secondary font-anta">
+                    How It Works
+                </a>
+                <div class="pt-6 flex flex-col space-y-4">
+                    <a href="login.html" class="btn btn-outline btn-outline-primary w-48 justify-center py-3 text-lg font-anta text-white border-white hover:bg-white/10">
+                        Log In
+                    </a>
+                    <a href="signup.html" class="btn btn-secondary w-48 justify-center py-3 text-lg font-anta">
+                        Sign Up
+                    </a>
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Page Header -->
+    <div class="bg-primary/10 py-8 md:py-12">
+        <div class="container mx-auto max-w-6xl px-4">
+            <h1 class="text-3xl md:text-4xl font-bold text-primary font-anta mb-2">Post a Job</h1>
+            <p class="text-gray-700 font-lexend">Tell us what you need help with and get matched with skilled fixers</p>
+        </div>
+    </div>
+
+    <!-- Job Posting Form -->
+    <section class="py-12 md:py-16 px-4">
+        <div class="container mx-auto max-w-3xl">
+            <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 md:p-8">
+                <div id="job-post-form">
+                    <!-- Updated Step Indicator -->
+                    <div class="mb-8 step-container">
+                        <div class="step-line">
+                            <div id="progress-bar" class="step-progress" style="width: 0%"></div>
+                        </div>
+                        <div class="step-item">
+                            <div id="step-circle-1" class="step-circle active">1</div>
+                            <span id="step-label-1" class="step-label active">Details</span>
+                        </div>
+                        <div class="step-item">
+                            <div id="step-circle-2" class="step-circle">2</div>
+                            <span id="step-label-2" class="step-label">Location</span>
+                        </div>
+                        <div class="step-item">
+                            <div id="step-circle-3" class="step-circle">3</div>
+                            <span id="step-label-3" class="step-label">Budget</span>
+                        </div>
+                        <div class="step-item">
+                            <div id="step-circle-4" class="step-circle">4</div>
+                            <span id="step-label-4" class="step-label">Review</span>
+                        </div>
+                    </div>
+
+                    <!-- Step 1: Job Details -->
+                    <div id="step-1" class="step-content">
+                        <h2 class="text-xl font-bold mb-6 font-anta">Job Details</h2>
+                        
+                        <div class="space-y-6">
+                            <div>
+                                <label for="job-title" class="block text-sm font-medium text-gray-700 mb-1 font-lexend">Job Title</label>
+                                <input 
+                                    type="text" 
+                                    id="job-title" 
+                                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary/50 font-lexend" 
+                                    placeholder="e.g. Fix leaking kitchen sink"
+                                    required
+                                />
+                            </div>
+                            
+                            <div>
+                                <label for="service-category" class="block text-sm font-medium text-gray-700 mb-1 font-lexend">Service Category</label>
+                                <select 
+                                    id="service-category" 
+                                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary/50 font-lexend"
+                                    required
+                                >
+                                    <option value="" disabled selected>Select a category</option>
+                                    <option value="plumbing">Plumbing</option>
+                                    <option value="electrical">Electrical</option>
+                                    <option value="carpentry">Carpentry</option>
+                                    <option value="painting">Painting</option>
+                                    <option value="appliance">Appliance Repair</option>
+                                    <option value="ac">A/C Repair</option>
+                                    <option value="tv">TV & Electronics</option>
+                                    <option value="network">Network Setup</option>
+                                    <option value="locksmith">Locksmith</option>
+                                    <option value="lawn">Lawn Care</option>
+                                    <option value="pest">Pest Control</option>
+                                    <option value="cleaning">Cleaning</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            
+                            <div>
+                                <label for="job-description" class="block text-sm font-medium text-gray-700 mb-1 font-lexend">Job Description</label>
+                                <textarea 
+                                    id="job-description" 
+                                    rows="5" 
+                                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary/50 font-lexend" 
+                                    placeholder="Describe the job in detail. What needs to be fixed? What's the issue? Any specific requirements?"
+                                    required
+                                ></textarea>
+                                <p class="text-xs text-gray-500 mt-1 font-lexend">Be as specific as possible to get accurate quotes from service providers.</p>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1 font-lexend">Upload Photos (Optional)</label>
+                                <div class="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center">
+                                    <div class="flex flex-col items-center">
+                                        <i data-lucide="upload" class="h-8 w-8 text-gray-400 mb-2"></i>
+                                        <p class="text-sm text-gray-500 font-lexend">Drag and drop files here or</p>
+                                        <label for="file-upload" class="mt-2 cursor-pointer">
+                                            <span class="btn btn-outline btn-outline-primary px-4 py-1.5 text-sm font-lexend">Browse Files</span>
+                                            <input id="file-upload" type="file" multiple class="hidden" accept="image/*" />
+                                        </label>
+                                        <p class="text-xs text-gray-500 mt-2 font-lexend">Upload up to 5 photos (Max 5MB each)</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1 font-lexend">When do you need this done?</label>
+                                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                                    <label class="flex items-center justify-center border border-gray-300 rounded-lg p-3 cursor-pointer hover:bg-gray-50">
+                                        <input type="radio" name="urgency" value="asap" class="mr-2" required />
+                                        <span class="text-sm font-lexend">As soon as possible</span>
+                                    </label>
+                                    <label class="flex items-center justify-center border border-gray-300 rounded-lg p-3 cursor-pointer hover:bg-gray-50">
+                                        <input type="radio" name="urgency" value="today" class="mr-2" />
+                                        <span class="text-sm font-lexend">Today</span>
+                                    </label>
+                                    <label class="flex items-center justify-center border border-gray-300 rounded-lg p-3 cursor-pointer hover:bg-gray-50">
+                                        <input type="radio" name="urgency" value="this-week" class="mr-2" />
+                                        <span class="text-sm font-lexend">This week</span>
+                                    </label>
+                                    <label class="flex items-center justify-center border border-gray-300 rounded-lg p-3 cursor-pointer hover:bg-gray-50">
+                                        <input type="radio" name="urgency" value="flexible" class="mr-2" />
+                                        <span class="text-sm font-lexend">I'm flexible</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-8 flex justify-end">
+                            <button type="button" id="next-step-1" class="btn btn-primary px-6 py-2 font-lexend">
+                                Next Step
+                                <i data-lucide="arrow-right" class="h-4 w-4 ml-2"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Location -->
+                    <div id="step-2" class="step-content hidden">
+                        <h2 class="text-xl font-bold mb-6 font-anta">Job Location</h2>
+                        
+                        <div class="space-y-6">
+                            <div>
+                                <label for="city" class="block text-sm font-medium text-gray-700 mb-1 font-lexend">City</label>
+                                <select 
+                                    id="city" 
+                                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary/50 font-lexend"
+                                    required
+                                >
+                                    <option value="" disabled selected>Select a city</option>
+                                    <option value="laoag">Laoag City</option>
+                                    <option value="batac">Batac</option>
+                                    <option value="san-nicolas">San Nicolas</option>
+                                    <option value="dingras">Dingras</option>
+                                    <option value="paoay">Paoay</option>
+                                </select>
+                            </div>
+                            
+                            <div>
+                                <label for="address" class="block text-sm font-medium text-gray-700 mb-1 font-lexend">Specific Address (Optional)</label>
+                                <textarea 
+                                    id="address" 
+                                    rows="3" 
+                                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary/50 font-lexend" 
+                                    placeholder="Enter the exact address where the job will take place (e.g., street name, building number)"
+                                ></textarea>
+                                <p class="text-xs text-gray-500 mt-1 font-lexend">Providing a specific address helps fixers locate your job more easily.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-8 flex justify-between">
+                            <button type="button" id="prev-step-2" class="btn btn-outline btn-outline-primary px-6 py-2 font-lexend">
+                                <i data-lucide="arrow-left" class="h-4 w-4 mr-2"></i>
+                                Previous
+                            </button>
+                            <button type="button" id="next-step-2" class="btn btn-primary px-6 py-2 font-lexend">
+                                Next Step
+                                <i data-lucide="arrow-right" class="h-4 w-4 ml-2"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Budget -->
+                    <div id="step-3" class="step-content hidden">
+                        <h2 class="text-xl font-bold mb-6 font-anta">Budget</h2>
+                        
+                        <div class="space-y-6">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1 font-lexend">Budget Preference</label>
+                                <div class="grid grid-cols-2 gap-3">
+                                    <label class="flex items-center justify-center border border-gray-300 rounded-lg p-3 cursor-pointer hover:bg-gray-50">
+                                        <input type="radio" name="budget-type" value="fixed" class="mr-2" required />
+                                        <span class="text-sm font-lexend">Fixed Budget</span>
+                                    </label>
+                                    <label class="flex items-center justify-center border border-gray-300 rounded-lg p-3 cursor-pointer hover:bg-gray-50">
+                                        <input type="radio" name="budget-type" value="hourly" class="mr-2" />
+                                        <span class="text-sm font-lexend">Hourly Rate</span>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div id="fixed-budget" class="hidden">
+                                <label for="fixed-amount" class="block text-sm font-medium text-gray-700 mb-1 font-lexend">Fixed Amount (₱)</label>
+                                <input 
+                                    type="number" 
+                                    id="fixed-amount" 
+                                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary/50 font-lexend" 
+                                    placeholder="e.g., 1500"
+                                    min="0"
+                                />
+                                <p class="text-xs text-gray-500 mt-1 font-lexend">Enter the total amount you're willing to pay for the job.</p>
+                            </div>
+                            
+                            <div id="hourly-budget" class="hidden">
+                                <label for="hourly-rate" class="block text-sm font-medium text-gray-700 mb-1 font-lexend">Preferred Hourly Rate (₱/hour)</label>
+                                <input 
+                                    type="number" 
+                                    id="hourly-rate" 
+                                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary/50 font-lexend" 
+                                    placeholder="e.g., 300"
+                                    min="0"
+                                />
+                                <p class="text-xs text-gray-500 mt-1 font-lexend">Enter the hourly rate you're willing to pay.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-8 flex justify-between">
+                            <button type="button" id="prev-step-3" class="btn btn-outline btn-outline-primary px-6 py-2 font-lexend">
+                                <i data-lucide="arrow-left" class="h-4 w-4 mr-2"></i>
+                                Previous
+                            </button>
+                            <button type="button" id="next-step-3" class="btn btn-primary px-6 py-2 font-lexend">
+                                Next Step
+                                <i data-lucide="arrow-right" class="h-4 w-4 ml-2"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Step 4: Review -->
+                    <div id="step-4" class="step-content hidden">
+                        <h2 class="text-xl font-bold mb-6 font-anta">Review Your Job Posting</h2>
+                        
+                        <div class="space-y-6">
+                            <div>
+                                <h3 class="text-lg font-semibold font-lexend">Job Details</h3>
+                                <p class="text-sm text-gray-700"><strong>Title:</strong> <span id="review-title"></span></p>
+                                <p class="text-sm text-gray-700"><strong>Category:</strong> <span id="review-category"></span></p>
+                                <p class="text-sm text-gray-700"><strong>Description:</strong> <span id="review-description"></span></p>
+                                <p class="text-sm text-gray-700"><strong>Urgency:</strong> <span id="review-urgency"></span></p>
+                            </div>
+                            
+                            <div>
+                                <h3 class="text-lg font-semibold font-lexend">Location</h3>
+                                <p class="text-sm text-gray-700"><strong>City:</strong> <span id="review-city"></span></p>
+                                <p class="text-sm text-gray-700"><strong>Address:</strong> <span id="review-address"></span></p>
+                            </div>
+                            
+                            <div>
+                                <h3 class="text-lg font-semibold font-lexend">Budget</h3>
+                                <p class="text-sm text-gray-700"><strong>Type:</strong> <span id="review-budget-type"></span></p>
+                                <p class="text-sm text-gray-700"><strong>Amount:</strong> <span id="review-budget-amount"></span></p>
+                            </div>
+                            
+                            <div id="confirmation-message" class="hidden bg-green-50 border border-green-200 rounded-lg p-4 text-center">
+                                <p class="text-sm text-green-700 font-lexend">Your job has been posted successfully! You'll be matched with skilled fixers soon.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-8 flex justify-between">
+                            <button type="button" id="prev-step-4" class="btn btn-outline btn-outline-primary px-6 py-2 font-lexend">
+                                <i data-lucide="arrow-left" class="h-4 w-4 mr-2"></i>
+                                Previous
+                            </button>
+                            <button type="button" id="submit-job" class="btn btn-primary px-6 py-2 font-lexend">
+                                Post Job
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white">
+        <div class="container mx-auto max-w-6xl px-4 py-10 md:py-12">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="font-bold text-xl mb-4 font-anta">HandyFix</h3>
+                    <p class="text-gray-400 mb-4 text-sm md:text-base font-lexend">
+                        Connecting skilled service providers with customers across Ilocos Norte.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="index.html" class="text-gray-400 hover:text-white transition-colors">
+                            <i data-lucide="facebook" class="h-5 w-5"></i>
+                        </a>
+                        <a href="index.html" class="text-gray-400 hover:text-white transition-colors">
+                            <i data-lucide="instagram" class="h-5 w-5"></i>
+                        </a>
+                        <a href="index.html" class="text-gray-400 hover:text-white transition-colors">
+                            <i data-lucide="twitter" class="h-5 w-5"></i>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-lg mb-3 md:mb-4 font-anta">For Customers</h4>
+                    <ul class="space-y-2 text-sm md:text-base font-lexend">
+                        <li>
+                            <a href="find-handyman.html" class="text-gray-400 hover:text-white transition-colors">
+                                Find a Service Provider
+                            </a>
+                        </li>
+                        <li>
+                            <a href="post-job.html" class="text-gray-400 hover:text-white transition-colors">
+                                Post a Job
+                            </a>
+                        </li>
+                        <li>
+                            <a href="how-it-works.html" class="text-gray-400 hover:text-white transition-colors">
+                                How It Works
+                            </a>
+                        </li>
+                        <li>
+                            <a href="index.html" class="text-gray-400 hover:text-white transition-colors">
+                                Customer Support
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-lg mb-3 md:mb-4 font-anta">For Service Providers</h4>
+                    <ul class="space-y-2 text-sm md:text-base font-lexend">
+                        <li>
+                            <a href="signup.html" class="text-gray-400 hover:text-white transition-colors">
+                                Join as a Provider
+                            </a>
+                        </li>
+                        <li>
+                            <a href="index.html" class="text-gray-400 hover:text-white transition-colors">
+                                Find Jobs
+                            </a>
+                        </li>
+                        <li>
+                            <a href="index.html" class="text-gray-400 hover:text-white transition-colors">
+                                Build Your Profile
+                            </a>
+                        </li>
+                        <li>
+                            <a href="index.html" class="text-gray-400 hover:text-white transition-colors">
+                                Provider Resources
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-lg mb-3 md:mb-4 font-anta">Company</h4>
+                    <ul class="space-y-2 text-sm md:text-base font-lexend">
+                        <li>
+                            <a href="index.html" class="text-gray-400 hover:text-white transition-colors">
+                                About Us
+                            </a>
+                        </li>
+                        <li>
+                            <a href="index.html" class="text-gray-400 hover:text-white transition-colors">
+                                Careers
+                            </a>
+                        </li>
+                        <li>
+                            <a href="index.html" class="text-gray-400 hover:text-white transition-colors">
+                                Privacy Policy
+                            </a>
+                        </li>
+                        <li>
+                            <a href="index.html" class="text-gray-400 hover:text-white transition-colors">
+                                Terms of Service
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 md:mt-10 pt-6 text-center text-gray-400 text-sm font-lexend">
+                <p>© 2025 HandyFix Ilocos Norte. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Customer Service Chat -->
+    <div id="customer-service-chat" class="fixed z-[60]">
+        <!-- Chat Button -->
+        <button 
+            id="chat-toggle-btn"
+            class="fixed bottom-6 right-6 z-[60] bg-secondary hover:bg-secondary/90 text-white rounded-full p-3 shadow-lg transition-all duration-300 flex items-center justify-center"
+            aria-label="Customer Service Chat"
+        >
+            <i data-lucide="message-circle" class="h-6 w-6"></i>
+        </button>
+
+        <!-- Chat Window -->
+        <div id="chat-window" class="fixed bottom-20 right-6 z-[60] w-80 sm:w-96 bg-white rounded-lg shadow-xl border border-gray-200 flex flex-col overflow-hidden hidden chat-window" style="max-height: calc(100vh - 120px);">
+            <!-- Chat Header -->
+            <div class="bg-primary text-white p-3 flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                    <div class="bg-white/20 p-1.5 rounded-full">
+                        <i data-lucide="user" class="h-4 w-4"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-sm font-anta">HandyFix Support</h3>
+                        <p class="text-xs text-white/80 font-lexend">Online</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chat Messages -->
+            <div class="flex-1 p-3 overflow-y-auto bg-gray-50" style="max-height: 350px;">
+                <div id="chat-messages" class="space-y-3">
+                    <!-- Initial agent message -->
+                    <div class="flex justify-start">
+                        <div class="max-w-[80%] rounded-lg px-3 py-2 bg-white border border-gray-200 text-gray-800">
+                            <p class="text-sm font-lexend">Hello! How can I help you today?</p>
+                            <p class="text-xs mt-1 text-gray-500" id="initial-time"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chat Input -->
+            <div class="border-t border-gray-200 p-3 bg-white">
+                <div class="flex gap-2">
+                    <input
+                        type="text"
+                        id="chat-input"
+                        placeholder="Type your message..."
+                        class="flex-1 border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 font-lexend"
+                    />
+                    <button 
+                        class="bg-primary hover:bg-primary/90 text-white rounded-lg p-2 flex items-center justify-center"
+                    >
+                        <i data-lucide="send" class="h-5 w-5"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+        
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileMenuBackdrop = document.getElementById('mobile-menu-backdrop');
+        const mobileMenuClose = document.getElementById('mobile-menu-close');
+        const menuIcon = mobileMenuButton.querySelector('[data-lucide]');
+
+        function toggleMobileMenu() {
+            const isOpen = mobileMenu.classList.contains('open');
+            if (isOpen) {
+                mobileMenu.classList.remove('open');
+                mobileMenuBackdrop.classList.remove('open');
+                menuIcon.setAttribute('name', 'menu');
+            } else {
+                mobileMenu.classList.add('open');
+                mobileMenuBackdrop.classList.add('open');
+                menuIcon.setAttribute('name', 'x');
+            }
+            lucide.createIcons();
+        }
+
+        mobileMenuButton.addEventListener('click', toggleMobileMenu);
+        mobileMenuClose.addEventListener('click', toggleMobileMenu);
+
+        // Close mobile menu when a nav link is clicked
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', toggleMobileMenu);
+        });
+
+        // Chat functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set initial message time
+            document.getElementById('initial-time').textContent = new Date().toLocaleTimeString([], { 
+                hour: '2-digit', 
+                minute: '2-digit' 
+            });
+            
+            // Chat elements
+            const chatWindow = document.getElementById('chat-window');
+            const toggleBtn = document.getElementById('chat-toggle-btn');
+            const chatInput = document.getElementById('chat-input');
+            const messagesContainer = document.getElementById('chat-messages');
+            
+            // Toggle chat window
+            function toggleChat() {
+                const isHidden = chatWindow.classList.contains('hidden');
+                
+                chatWindow.classList.toggle('hidden');
+                toggleBtn.innerHTML = isHidden 
+                    ? '<i data-lucide="x" class="h-6 w-6"></i>'
+                    : '<i data-lucide="message-circle" class="h-6 w-6"></i>';
+                
+                // Re-initialize icons
+                lucide.createIcons();
+                
+                // Scroll to bottom when opening
+                if (isHidden) {
+                    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+                }
+            }
+            
+            // Add message to chat
+            function addMessage(message, isUser = false) {
+                const time = new Date().toLocaleTimeString([], { 
+                    hour: '2-digit', 
+                    minute: '2-digit' 
+                });
+                
+                const messageHTML = `
+                    <div class="flex justify-${isUser ? 'end' : 'start'}">
+                        <div class="max-w-[80%] rounded-lg px-3 py-2 ${
+                            isUser 
+                                ? 'bg-secondary text-white' 
+                                : 'bg-white border border-gray-200 text-gray-800'
+                        }">
+                            <p class="text-sm font-lexend">${message}</p>
+                            <p class="text-xs mt-1 ${
+                                isUser ? 'text-white/70' : 'text-gray-500'
+                            }">${time}</p>
+                        </div>
+                    </div>
+                `;
+                
+                messagesContainer.insertAdjacentHTML('beforeend', messageHTML);
+                messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            }
+            
+            // Handle chat input
+            chatInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    const message = chatInput.value.trim();
+                    if (!message) return;
+                    
+                    // Add user message
+                    addMessage(message, true);
+                    chatInput.value = '';
+                    
+                    // Simulate response
+                    setTimeout(() => {
+                        const responses = [
+                            "I'll be happy to help with that!",
+                            "Let me check that for you right away.",
+                            "Thank you for contacting HandyFix customer service.",
+                            "Is there anything else you need help with?",
+                            "We appreciate your patience."
+                        ];
+                        
+                        const response = responses[Math.floor(Math.random() * responses.length)];
+                        addMessage(response);
+                    }, 1000);
+                }
+            });
+            
+            // Event listeners
+            toggleBtn.addEventListener('click', toggleChat);
+        });
+
+        // Multi-step form functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            let currentStep = 1;
+            const steps = document.querySelectorAll('.step-content');
+            const stepCircles = document.querySelectorAll('.step-circle');
+            const stepLabels = document.querySelectorAll('.step-label');
+            const progressBar = document.getElementById('progress-bar');
+            
+            // Form elements
+            const jobTitle = document.getElementById('job-title');
+            const serviceCategory = document.getElementById('service-category');
+            const jobDescription = document.getElementById('job-description');
+            const urgencyInputs = document.querySelectorAll('input[name="urgency"]');
+            const city = document.getElementById('city');
+            const address = document.getElementById('address');
+            const budgetTypeInputs = document.querySelectorAll('input[name="budget-type"]');
+            const fixedAmount = document.getElementById('fixed-amount');
+            const hourlyRate = document.getElementById('hourly-rate');
+            
+            // Review elements
+            const reviewTitle = document.getElementById('review-title');
+            const reviewCategory = document.getElementById('review-category');
+            const reviewDescription = document.getElementById('review-description');
+            const reviewUrgency = document.getElementById('review-urgency');
+            const reviewCity = document.getElementById('review-city');
+            const reviewAddress = document.getElementById('review-address');
+            const reviewBudgetType = document.getElementById('review-budget-type');
+            const reviewBudgetAmount = document.getElementById('review-budget-amount');
+            const confirmationMessage = document.getElementById('confirmation-message');
+            
+            // Show current step
+            function showStep(step) {
+                steps.forEach(s => s.classList.add('hidden'));
+                steps[step - 1].classList.remove('hidden');
+                
+                stepCircles.forEach((circle, index) => {
+                    if (index < step) {
+                        circle.classList.add('active');
+                    } else {
+                        circle.classList.remove('active');
+                    }
+                });
+                
+                stepLabels.forEach((label, index) => {
+                    if (index < step) {
+                        label.classList.add('active');
+                    } else {
+                        label.classList.remove('active');
+                    }
+                });
+                
+                // Update progress bar
+                const progressWidth = ((step - 1) / (steps.length - 1)) * 100;
+                progressBar.style.width = `${progressWidth}%`;
+            }
+            
+            // Validate current step
+            function validateStep(step) {
+                if (step === 1) {
+                    if (!jobTitle.value.trim()) {
+                        alert('Please enter a job title.');
+                        return false;
+                    }
+                    if (!serviceCategory.value) {
+                        alert('Please select a service category.');
+                        return false;
+                    }
+                    if (!jobDescription.value.trim()) {
+                        alert('Please provide a job description.');
+                        return false;
+                    }
+                    const urgencySelected = Array.from(urgencyInputs).some(input => input.checked);
+                    if (!urgencySelected) {
+                        alert('Please select when you need this done.');
+                        return false;
+                    }
+                } else if (step === 2) {
+                    if (!city.value) {
+                        alert('Please select a city.');
+                        return false;
+                    }
+                } else if (step === 3) {
+                    const budgetTypeSelected = Array.from(budgetTypeInputs).some(input => input.checked);
+                    if (!budgetTypeSelected) {
+                        alert('Please select a budget preference.');
+                        return false;
+                    }
+                    if (document.querySelector('input[name="budget-type"]:checked').value === 'fixed' && !fixedAmount.value.trim()) {
+                        alert('Please enter a fixed amount.');
+                        return false;
+                    }
+                    if (document.querySelector('input[name="budget-type"]:checked').value === 'hourly' && !hourlyRate.value.trim()) {
+                        alert('Please enter an hourly rate.');
+                        return false;
+                    }
+                }
+                return true;
+            }
+            
+            // Populate review step
+            function populateReview() {
+                reviewTitle.textContent = jobTitle.value;
+                reviewCategory.textContent = serviceCategory.options[serviceCategory.selectedIndex].text;
+                reviewDescription.textContent = jobDescription.value;
+                const selectedUrgency = document.querySelector('input[name="urgency"]:checked').value;
+                reviewUrgency.textContent = selectedUrgency.charAt(0).toUpperCase() + selectedUrgency.slice(1).replace('-', ' ');
+                reviewCity.textContent = city.options[city.selectedIndex].text;
+                reviewAddress.textContent = address.value || 'Not provided';
+                const budgetType = document.querySelector('input[name="budget-type"]:checked').value;
+                reviewBudgetType.textContent = budgetType.charAt(0).toUpperCase() + budgetType.slice(1);
+                reviewBudgetAmount.textContent = budgetType === 'fixed' ? `₱${fixedAmount.value}` : `₱${hourlyRate.value}/hour`;
+            }
+            
+            // Toggle budget fields
+            budgetTypeInputs.forEach(input => {
+                input.addEventListener('change', function() {
+                    if (this.value === 'fixed') {
+                        document.getElementById('fixed-budget').classList.remove('hidden');
+                        document.getElementById('hourly-budget').classList.add('hidden');
+                    } else {
+                        document.getElementById('fixed-budget').classList.add('hidden');
+                        document.getElementById('hourly-budget').classList.remove('hidden');
+                    }
+                });
+            });
+            
+            // Navigation buttons
+            document.getElementById('next-step-1').addEventListener('click', () => {
+                if (validateStep(1)) {
+                    currentStep = 2;
+                    showStep(currentStep);
+                }
+            });
+            
+            document.getElementById('prev-step-2').addEventListener('click', () => {
+                currentStep = 1;
+                showStep(currentStep);
+            });
+            
+            document.getElementById('next-step-2').addEventListener('click', () => {
+                if (validateStep(2)) {
+                    currentStep = 3;
+                    showStep(currentStep);
+                }
+            });
+            
+            document.getElementById('prev-step-3').addEventListener('click', () => {
+                currentStep = 2;
+                showStep(currentStep);
+            });
+            
+            document.getElementById('next-step-3').addEventListener('click', () => {
+                if (validateStep(3)) {
+                    currentStep = 4;
+                    populateReview();
+                    showStep(currentStep);
+                }
+            });
+            
+            document.getElementById('prev-step-4').addEventListener('click', () => {
+                currentStep = 3;
+                confirmationMessage.classList.add('hidden');
+                showStep(currentStep);
+            });
+            
+            document.getElementById('submit-job').addEventListener('click', () => {
+                confirmationMessage.classList.remove('hidden');
+                document.getElementById('submit-job').disabled = true;
+                document.getElementById('submit-job').classList.add('opacity-50', 'cursor-not-allowed');
+            });
+            
+            // Initialize first step
+            showStep(currentStep);
+        });
+    </script>
+</body>
+</html>
