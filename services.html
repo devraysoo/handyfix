@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services - HandyFix</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anta&family=Lexend:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://unpkg.com/lucide@latest/dist/lucide.css">
+    <link rel="icon" href="https://ff6miz3krrdkxd1y.public.blob.vercel-storage.com/handy-fix-logo%20(2)-bwnd09bLrOhY9B8TUhgpa3kn1WeOLw.png" type="image/png">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#601008',
+                        secondary: '#F88820',
+                        accent: '#ffce0a',
+                    },
+                    fontFamily: {
+                        anta: ['Anta', 'sans-serif'],
+                        lexend: ['Lexend', 'sans-serif'],
+                        poppins: ['Poppins', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            font-family: 'Lexend', sans-serif;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            transition-property: color, background-color, border-color;
+            transition-duration: 150ms;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .btn-primary {
+            background-color: #601008;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: rgba(96, 16, 8, 0.9);
+        }
+        
+        .btn-secondary {
+            background-color: #F88820;
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background-color: rgba(248, 136, 32, 0.9);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid;
+        }
+        
+        .btn-outline-primary {
+            border-color: #601008;
+            color: #601008;
+        }
+        
+        .btn-outline-primary:hover {
+            background-color: rgba(96, 16, 8, 0.1);
+        }
+
+        .chat-window {
+            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+        }
+
+        /* Mobile Menu Styles */
+        #mobile-menu {
+            transform: translateX(100%);
+            transition: transform 300ms ease-in-out;
+        }
+
+        #mobile-menu.open {
+            transform: translateX(0);
+        }
+
+        #mobile-menu-backdrop {
+            background: rgba(0, 0, 0, 0.5);
+            transition: opacity 300ms ease-in-out;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        #mobile-menu-backdrop.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-zinc-50">
+    <!-- Header -->
+    <header class="bg-white sticky top-0 z-50 shadow-sm">
+        <div class="container mx-auto max-w-6xl px-4">
+            <div class="flex items-center justify-between h-14 md:h-16">
+                <!-- Logo -->
+                <a href="index.html" class="flex items-center space-x-2">
+                    <div class="bg-primary rounded-full w-7 h-7 md:w-8 md:h-8 flex items-center justify-center">
+                        <img src="https://ff6miz3krrdkxd1y.public.blob.vercel-storage.com/handy-fix-logo%20(2)-bwnd09bLrOhY9B8TUhgpa3kn1WeOLw.png" alt="HandyFix Logo" class="w-full h-full object-contain" />
+                    </div>
+                    <span class="font-bold text-lg md:text-xl text-primary font-anta">HandyFix</span>
+                </a>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex space-x-6 lg:space-x-8">
+                    <a href="services.html" class="text-primary font-medium font-lexend border-b-2 border-primary">
+                        Services
+                    </a>
+                    <a href="index.html" class="text-gray-700 hover:text-primary font-medium font-lexend">
+                        Find Fixers
+                    </a>
+                    <a href="index.html" class="text-gray-700 hover:text-primary font-medium font-lexend">
+                        Post a Job
+                    </a>
+                    <a href="how-it-works.html" class="text-gray-700 hover:text-primary font-medium font-lexend">
+                        How It Works
+                    </a>
+                </nav>
+
+                <!-- Auth Buttons - Desktop -->
+                <div class="hidden md:flex items-center space-x-3 lg:space-x-4">
+                    <a href="login.html" class="btn btn-outline btn-outline-primary px-4 py-2 text-sm font-lexend">
+                        Log In
+                    </a>
+                    <a href="signup.html" class="btn btn-primary px-4 py-2 text-sm font-lexend">
+                        Sign Up
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-button" class="md:hidden p-1.5" aria-label="Open menu">
+                    <i data-lucide="menu" class="h-5 w-5"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu-backdrop" class="md:hidden fixed inset-0 z-40">
+        <div id="mobile-menu" class="fixed top-0 right-0 h-screen w-screen bg-primary text-white flex flex-col">
+            <div class="flex justify-end p-4">
+                <button id="mobile-menu-close" class="text-white">
+                    <i data-lucide="x" class="h-6 w-6"></i>
+                </button>
+            </div>
+            <nav class="flex flex-col items-center justify-center flex-1 space-y-6">
+                <a href="services.html" class="mobile-nav-link text-2xl font-bold text-white hover:text-secondary font-anta">
+                    Services
+                </a>
+                <a href="index.html" class="mobile-nav-link text-2xl font-bold text-white hover:text-secondary font-anta">
+                    Find Fixers
+                </a>
+                <a href="index.html" class="mobile-nav-link text-2xl font-bold text-white hover:text-secondary font-anta">
+                    Post a Job
+                </a>
+                <a href="how-it-works.html" class="mobile-nav-link text-2xl font-bold text-white hover:text-secondary font-anta">
+                    How It Works
+                </a>
+                <div class="pt-6 flex flex-col space-y-4">
+                    <a href="login.html" class="btn btn-outline btn-outline-primary w-48 justify-center py-3 text-lg font-anta text-white border-white hover:bg-white/10">
+                        Log In
+                    </a>
+                    <a href="signup.html" class="btn btn-secondary w-48 justify-center py-3 text-lg font-anta">
+                        Sign Up
+                    </a>
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Page Header -->
+    <div class="bg-primary/10 py-8 md:py-12">
+        <div class="container mx-auto max-w-6xl px-4">
+            <h1 class="text-3xl md:text-4xl font-bold text-primary font-anta mb-2">Our Services</h1>
+            <p class="text-gray-700 font-lexend">Find the right service for your home maintenance and repair needs</p>
+        </div>
+    </div>
+
+    <!-- Services Grid -->
+    <section class="py-12 md:py-16 px-4">
+        <div class="container mx-auto max-w-6xl">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <div class="bg-white p-6 rounded-lg border border-gray-200 hover:border-secondary hover:shadow-md transition-all">
+                    <div class="bg-secondary/10 p-3 rounded-full w-14 h-14 flex items-center justify-center mb-4 text-secondary">
+                        <i data-lucide="wrench" class="h-7 w-7"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2 font-anta">Plumbing</h3>
+                    <p class="text-gray-600 text-sm mb-4 font-lexend">Professional plumbing services including leak repairs, pipe installations, drain cleaning, toilet repairs, and water heater services.</p>
+                    <a href="services/plumbing.html" class="text-secondary font-medium text-sm flex items-center hover:underline font-lexend">
+                        Learn more
+                        <i data-lucide="arrow-right" class="h-4 w-4 ml-1"></i>
+                    </a>
+                </div>
+                <div class="bg-white p-6 rounded-lg border border-gray-200 hover:border-secondary hover:shadow-md transition-all">
+                    <div class="bg-secondary/10 p-3 rounded-full w-14 h-14 flex items-center justify-center mb-4 text-secondary">
+                        <i data-lucide="lightbulb" class="h-7 w-7"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2 font-anta">Electrical</h3>
+                    <p class="text-gray-600 text-sm mb-4 font-lexend">Expert electrical services including wiring, outlet installation, lighting fixtures, circuit breaker repairs, and electrical troubleshooting.</p>
+                    <a href="services/electrical.html" class="text-secondary font-medium text-sm flex items-center hover:underline font-lexend">
+                        Learn more
+                        <i data-lucide="arrow-right" class="h-4 w-4 ml-1"></i>
+                    </a>
+                </div>
+                <div class="bg-white p-6 rounded-lg border border-gray-200 hover:border-secondary hover:shadow-md transition-all">
+                    <div class="bg-secondary/10 p-3 rounded-full w-14 h-14 flex items-center justify-center mb-4 text-secondary">
+                        <i data-lucide="tv" class="h-7 w-7"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2 font-anta">TV & Electronics</h3>
+                    <p class="text-gray-600 text-sm mb-4 font-lexend">TV mounting, home theater setup, smart home device installation, and electronics troubleshooting and repair.</p>
+                    <a href="services/tv-electronics.html" class="text-secondary font-medium text-sm flex items-center hover:underline font-lexend">
+                        Learn more
+                        <i data-lucide="arrow-right" class="h-4 w-4 ml-1"></i>
+                    </a>
+                </div>
+                <div class="bg-white p-6 rounded-lg border border-gray-200 hover:border-secondary hover:shadow-md transition-all">
+                    <div class="bg-secondary/10 p-3 rounded-full w-14 h-14 flex items-center justify-center mb-4 text-secondary">
+                        <i data-lucide="air-vent" class="h-7 w-7"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2 font-anta">A/C Repair</h3>
+                    <p class="text-gray-600 text-sm mb-4 font-lexend">Air conditioning installation, maintenance, and repair services to keep your home cool and comfortable.</p>
+                    <a href="services/ac-repair.html" class="text-secondary font-medium text-sm flex items-center hover:underline font-lexend">
+                        Learn more
+                        <i data-lucide="arrow-right" class="h-4 w-4 ml-1"></i>
+                    </a>
+                </div>
+                <div class="bg-white p-6 rounded-lg border border-gray-200 hover:border-secondary hover:shadow-md transition-all">
+                    <div class="bg-secondary/10 p-3 rounded-full w-14 h-14 flex items-center justify-center mb-4 text-secondary">
+                        <i data-lucide="paint-bucket" class="h-7 w-7"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2 font-anta">Painting</h3>
+                    <p class="text-gray-600 text-sm mb-4 font-lexend">Interior and exterior painting services, including wall preparation, color consultation, and professional finishing.</p>
+                    <a href="services/painting.html" class="text-secondary font-medium text-sm flex items-center hover:underline font-lexend">
+                        Learn more
+                        <i data-lucide="arrow-right" class="h-4 w-4 ml-1"></i>
+                    </a>
+                </div>
+                <div class="bg-white p-6 rounded-lg border border-gray-200 hover:border-secondary hover:shadow-md transition-all">
+                    <div class="bg-secondary/10 p-3 rounded-full w-14 h-14 flex items-center justify-center mb-4 text-secondary">
+                        <i data-lucide="hammer" class="h-7 w-7"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2 font-anta">Carpentry</h3>
+                    <p class="text-gray-600 text-sm mb-4 font-lexend">Custom carpentry work including furniture repair, cabinet installation, door repairs, and wooden structure building.</p>
+                    <a href="services/carpentry.html" class="text-secondary font-medium text-sm flex items-center hover:underline font-lexend">
+                        Learn more
+                        <i data-lucide="arrow-right" class="h-4 w-4 ml-1"></i>
+                    </a>
+                </div>
+                <div class="bg-white p-6 rounded-lg border border-gray-200 hover:border-secondary hover:shadow-md transition-all">
+                    <div class="bg-secondary/10 p-3 rounded-full w-14 h-14 flex items-center justify-center mb-4 text-secondary">
+                        <i data-lucide="router" class="h-7 w-7"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2 font-anta">Network Setup</h3>
+                    <p class="text-gray-600 text-sm mb-4 font-lexend">WiFi network installation, router configuration, network troubleshooting, and home office setup.</p>
+                    <a href="services/network-setup.html" class="text-secondary font-medium text-sm flex items-center hover:underline font-lexend">
+                        Learn more
+                        <i data-lucide="arrow-right" class="h-4 w-4 ml-1"></i>
+                    </a>
+                </div>
+                <div class="bg-white p-6 rounded-lg border border-gray-200 hover:border-secondary hover:shadow-md transition-all">
+                    <div class="bg-secondary/10 p-3 rounded-full w-14 h-14 flex items-center justify-center mb-4 text-secondary">
+                        <i data-lucide="lock" class="h-7 w-7"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2 font-anta">Locksmith</h3>
+                    <p class="text-gray-600 text-sm mb-4 font-lexend">Lock installation, key cutting, lock repairs, and emergency lockout services for your home and business.</p>
+                    <a href="services/locksmith.html" class="text-secondary font-medium text-sm flex items-center hover:underline font-lexend">
+                        Learn more
+                        <i data-lucide="arrow-right" class="h-4 w-4 ml-1"></i>
+                    </a>
+                </div>
+                <div class="bg-white p-6 rounded-lg border border-gray-200 hover:border-secondary hover:shadow-md transition-all">
+                    <div class="bg-secondary/10 p-3 rounded-full w-14 h-14 flex items-center justify-center mb-4 text-secondary">
+                        <i data-lucide="fan" class="h-7 w-7"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2 font-anta">Appliance Repair</h3>
+                    <p class="text-gray-600 text-sm mb-4 font-lexend">Repair services for refrigerators, washing machines, dryers, dishwashers, and other home appliances.</p>
+                    <a href="services/appliance-repair.html" class="text-secondary font-medium text-sm flex items-center hover:underline font-lexend">
+                        Learn more
+                        <i data-lucide="arrow-right" class="h-4 w-4 ml-1"></i>
+                    </a>
+                </div>
+                <div class="bg-white p-6 rounded-lg border border-gray-200 hover:border-secondary hover:shadow-md transition-all">
+                    <div class="bg-secondary/10 p-3 rounded-full w-14 h-14 flex items-center justify-center mb-4 text-secondary">
+                        <i data-lucide="scissors" class="h-7 w-7"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2 font-anta">Lawn Care</h3>
+                    <p class="text-gray-600 text-sm mb-4 font-lexend">Lawn mowing, garden maintenance, tree trimming, and landscaping services for your outdoor spaces.</p>
+                    <a href="services/lawn-care.html" class="text-secondary font-medium text-sm flex items-center hover:underline font-lexend">
+                        Learn more
+                        <i data-lucide="arrow-right" class="h-4 w-4 ml-1"></i>
+                    </a>
+                </div>
+                <div class="bg-white p-6 rounded-lg border border-gray-200 hover:border-secondary hover:shadow-md transition-all">
+                    <div class="bg-secondary/10 p-3 rounded-full w-14 h-14 flex items-center justify-center mb-4 text-secondary">
+                        <i data-lucide="spray-can" class="h-7 w-7"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2 font-anta">Pest Control</h3>
+                    <p class="text-gray-600 text-sm mb-4 font-lexend">Effective pest control services to eliminate and prevent insects, rodents, and other unwanted pests.</p>
+                    <a href="services/pest-control.html" class="text-secondary font-medium text-sm flex items-center hover:underline font-lexend">
+                        Learn more
+                        <i data-lucide="arrow-right" class="h-4 w-4 ml-1"></i>
+                    </a>
+                </div>
+                <div class="bg-white p-6 rounded-lg border border-gray-200 hover:border-secondary hover:shadow-md transition-all">
+                    <div class="bg-secondary/10 p-3 rounded-full w-14 h-14 flex items-center justify-center mb-4 text-secondary">
+                        <i data-lucide="mop" class="h-7 w-7"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2 font-anta">Cleaning</h3>
+                    <p class="text-gray-600 text-sm mb-4 font-lexend">Professional cleaning services for homes and offices, including deep cleaning, regular maintenance, and special event cleanup.</p>
+                    <a href="services/cleaning.html" class="text-secondary font-medium text-sm flex items-center hover:underline font-lexend">
+                        Learn more
+                        <i data-lucide="arrow-right" class="h-4 w-4 ml-1"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="bg-primary py-12 md:py-16 px-4 text-white">
+        <div class="container mx-auto max-w-6xl text-center">
+            <h2 class="text-2xl md:text-3xl font-bold mb-4 md:mb-6 font-anta">Need a Service Not Listed?</h2>
+            <p class="text-base md:text-lg mb-6 md:mb-8 max-w-2xl mx-auto font-lexend">
+                We have many more service providers with various skills. Post your specific job and get matched with the right professional.
+            </p>
+            <a href="index.html" class="btn bg-accent hover:bg-accent/90 text-primary font-semibold px-6 md:px-8 py-2.5 md:py-3 rounded-lg font-poppins">
+                Post a Custom Job
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white">
+        <div class="container mx-auto max-w-6xl px-4 py-10 md:py-12">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="font-bold text-xl mb-4 font-anta">HandyFix</h3>
+                    <p class="text-gray-400 mb-4 text-sm md:text-base font-lexend">
+                        Connecting skilled service providers with customers across Ilocos Norte.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="index.html" class="text-gray-400 hover:text-white transition-colors">
+                            <i data-lucide="facebook" class="h-5 w-5"></i>
+                        </a>
+                        <a href="index.html" class="text-gray-400 hover:text-white transition-colors">
+                            <i data-lucide="instagram" class="h-5 w-5"></i>
+                        </a>
+                        <a href="index.html" class="text-gray-400 hover:text-white transition-colors">
+                            <i data-lucide="twitter" class="h-5 w-5"></i>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-lg mb-3 md:mb-4 font-anta">For Customers</h4>
+                    <ul class="space-y-2 text-sm md:text-base font-lexend">
+                        <li>
+                            <a href="index.html" class="text-gray-400 hover:text-white transition-colors">
+                                Find a Service Provider
+                            </a>
+                        </li>
+                        <li>
+                            <a href="index.html" class="text-gray-400 hover:text-white transition-colors">
+                                Post a Job
+                            </a>
+                        </li>
+                        <li>
+                            <a href="how-it-works.html" class="text-gray-400 hover:text-white transition-colors">
+                                How It Works
+                            </a>
+                        </li>
+                        <li>
+                            <a href="index.html" class="text-gray-400 hover:text-white transition-colors">
+                                Customer Support
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-lg mb-3 md:mb-4 font-anta">For Service Providers</h4>
+                    <ul class="space-y-2 text-sm md:text-base font-lexend">
+                        <li>
+                            <a href="signup.html" class="text-gray-400 hover:text-white transition-colors">
+                                Join as a Provider
+                            </a>
+                        </li>
+                        <li>
+                            <a href="index.html" class="text-gray-400 hover:text-white transition-colors">
+                                Find Jobs
+                            </a>
+                        </li>
+                        <li>
+                            <a href="index.html" class="text-gray-400 hover:text-white transition-colors">
+                                Build Your Profile
+                            </a>
+                        </li>
+                        <li>
+                            <a href="index.html" class="text-gray-400 hover:text-white transition-colors">
+                                Provider Resources
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-lg mb-3 md:mb-4 font-anta">Company</h4>
+                    <ul class="space-y-2 text-sm md:text-base font-lexend">
+                        <li>
+                            <a href="index.html" class="text-gray-400 hover:text-white transition-colors">
+                                About Us
+                            </a>
+                        </li>
+                        <li>
+                            <a href="index.html" class="text-gray-400 hover:text-white transition-colors">
+                                Careers
+                            </a>
+                        </li>
+                        <li>
+                            <a href="index.html" class="text-gray-400 hover:text-white transition-colors">
+                                Privacy Policy
+                            </a>
+                        </li>
+                        <li>
+                            <a href="index.html" class="text-gray-400 hover:text-white transition-colors">
+                                Terms of Service
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 md:mt-10 pt-6 text-center text-gray-400 text-sm font-lexend">
+                <p>© 2025 HandyFix Ilocos Norte. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Customer Service Chat -->
+    <div id="customer-service-chat" class="fixed z-[60]">
+        <!-- Chat Button -->
+        <button 
+            id="chat-toggle-btn"
+            class="fixed bottom-6 right-6 z-[60] bg-secondary hover:bg-secondary/90 text-white rounded-full p-3 shadow-lg transition-all duration-300 flex items-center justify-center"
+            aria-label="Customer Service Chat"
+        >
+            <i data-lucide="message-circle" class="h-6 w-6"></i>
+        </button>
+
+        <!-- Chat Window -->
+        <div id="chat-window" class="fixed bottom-20 right-6 z-[60] w-80 sm:w-96 bg-white rounded-lg shadow-xl border border-gray-200 flex flex-col overflow-hidden hidden chat-window" style="max-height: calc(100vh - 120px);">
+            <!-- Chat Header -->
+            <div class="bg-primary text-white p-3 flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                    <div class="bg-white/20 p-1.5 rounded-full">
+                        <i data-lucide="user" class="h-4 w-4"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-sm font-anta">HandyFix Support</h3>
+                        <p class="text-xs text-white/80 font-lexend">Online</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chat Messages -->
+            <div class="flex-1 p-3 overflow-y-auto bg-gray-50" style="max-height: 350px;">
+                <div id="chat-messages" class="space-y-3">
+                    <!-- Initial agent message -->
+                    <div class="flex justify-start">
+                        <div class="max-w-[80%] rounded-lg px-3 py-2 bg-white border border-gray-200 text-gray-800">
+                            <p class="text-sm font-lexend">Hello! How can I help you today?</p>
+                            <p class="text-xs mt-1 text-gray-500" id="initial-time"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chat Input -->
+            <div class="border-t border-gray-200 p-3 bg-white">
+                <div class="flex gap-2">
+                    <input
+                        type="text"
+                        id="chat-input"
+                        placeholder="Type your message..."
+                        class="flex-1 border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 font-lexend"
+                    />
+                    <button 
+                        class="bg-primary hover:bg-primary/90 text-white rounded-lg p-2 flex items-center justify-center"
+                    >
+                        <i data-lucide="send" class="h-5 w-5"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+        
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileMenuBackdrop = document.getElementById('mobile-menu-backdrop');
+        const mobileMenuClose = document.getElementById('mobile-menu-close');
+        const menuIcon = mobileMenuButton.querySelector('[data-lucide]');
+
+        function toggleMobileMenu() {
+            const isOpen = mobileMenu.classList.contains('open');
+            if (isOpen) {
+                mobileMenu.classList.remove('open');
+                mobileMenuBackdrop.classList.remove('open');
+                menuIcon.setAttribute('name', 'menu');
+            } else {
+                mobileMenu.classList.add('open');
+                mobileMenuBackdrop.classList.add('open');
+                menuIcon.setAttribute('name', 'x');
+            }
+            lucide.createIcons();
+        }
+
+        mobileMenuButton.addEventListener('click', toggleMobileMenu);
+        mobileMenuClose.addEventListener('click', toggleMobileMenu);
+
+        // Close mobile menu when a nav link is clicked
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', toggleMobileMenu);
+        });
+
+        // Chat functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set initial message time
+            document.getElementById('initial-time').textContent = new Date().toLocaleTimeString([], { 
+                hour: '2-digit', 
+                minute: '2-digit' 
+            });
+            
+            // Chat elements
+            const chatWindow = document.getElementById('chat-window');
+            const toggleBtn = document.getElementById('chat-toggle-btn');
+            const chatInput = document.getElementById('chat-input');
+            const messagesContainer = document.getElementById('chat-messages');
+            
+            // Toggle chat window
+            function toggleChat() {
+                const isHidden = chatWindow.classList.contains('hidden');
+                
+                chatWindow.classList.toggle('hidden');
+                toggleBtn.innerHTML = isHidden 
+                    ? '<i data-lucide="x" class="h-6 w-6"></i>'
+                    : '<i data-lucide="message-circle" class="h-6 w-6"></i>';
+                
+                // Re-initialize icons
+                lucide.createIcons();
+                
+                // Scroll to bottom when opening
+                if (isHidden) {
+                    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+                }
+            }
+            
+            // Add message to chat
+            function addMessage(message, isUser = false) {
+                const time = new Date().toLocaleTimeString([], { 
+                    hour: '2-digit', 
+                    minute: '2-digit' 
+                });
+                
+                const messageHTML = `
+                    <div class="flex justify-${isUser ? 'end' : 'start'}">
+                        <div class="max-w-[80%] rounded-lg px-3 py-2 ${
+                            isUser 
+                                ? 'bg-secondary text-white' 
+                                : 'bg-white border border-gray-200 text-gray-800'
+                        }">
+                            <p class="text-sm font-lexend">${message}</p>
+                            <p class="text-xs mt-1 ${
+                                isUser ? 'text-white/70' : 'text-gray-500'
+                            }">${time}</p>
+                        </div>
+                    </div>
+                `;
+                
+                messagesContainer.insertAdjacentHTML('beforeend', messageHTML);
+                messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            }
+            
+            // Handle chat input
+            chatInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    const message = chatInput.value.trim();
+                    if (!message) return;
+                    
+                    // Add user message
+                    addMessage(message, true);
+                    chatInput.value = '';
+                    
+                    // Simulate response
+                    setTimeout(() => {
+                        const responses = [
+                            "I'll be happy to help with that!",
+                            "Let me check that for you right away.",
+                            "Thank you for contacting HandyFix customer service.",
+                            "Is there anything else you need help with?",
+                            "We appreciate your patience."
+                        ];
+                        
+                        const response = responses[Math.floor(Math.random() * responses.length)];
+                        addMessage(response);
+                    }, 1000);
+                }
+            });
+            
+            // Event listeners
+            toggleBtn.addEventListener('click', toggleChat);
+        });
+    </script>
+</body>
+</html>
