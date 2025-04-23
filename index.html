@@ -85,6 +85,28 @@
         .chat-window {
             transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
         }
+
+        /* Mobile Menu Styles */
+        #mobile-menu {
+            transform: translateX(100%);
+            transition: transform 300ms ease-in-out;
+        }
+
+        #mobile-menu.open {
+            transform: translateX(0);
+        }
+
+        #mobile-menu-backdrop {
+            background: rgba(0, 0, 0, 0.5);
+            transition: opacity 300ms ease-in-out;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        #mobile-menu-backdrop.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
     </style>
 </head>
 <body class="min-h-screen bg-zinc-50">
@@ -132,35 +154,40 @@
                 </button>
             </div>
         </div>
-
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="md:hidden bg-white hidden absolute top-14 left-0 w-full z-40 shadow-md">
-            <div class="container mx-auto px-4 py-3">
-                <nav class="flex flex-col space-y-3">
-                    <a href="index.html" class="py-2 text-gray-700 font-medium font-lexend">
-                        Services
-                    </a>
-                    <a href="index.html" class="py-2 text-gray-700 font-medium font-lexend">
-                        Find Fixers
-                    </a>
-                    <a href="index.html" class="py-2 text-gray-700 font-medium font-lexend">
-                        Post a Job
-                    </a>
-                    <a href="index.html" class="py-2 text-gray-700 font-medium font-lexend">
-                        How It Works
-                    </a>
-                    <div class="pt-2 flex flex-col space-y-2">
-                        <a href="index.html" class="btn btn-outline btn-outline-primary w-full justify-center py-2 font-lexend">
-                            Log In
-                        </a>
-                        <a href="index.html" class="btn btn-primary w-full justify-center py-2 font-lexend">
-                            Sign Up
-                        </a>
-                    </div>
-                </nav>
-            </div>
-        </div>  
     </header>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu-backdrop" class="md:hidden fixed inset-0 z-40">
+        <div id="mobile-menu" class="fixed top-0 right-0 h-screen w-screen bg-primary text-white flex flex-col">
+            <div class="flex justify-end p-4">
+                <button id="mobile-menu-close" class="text-white">
+                    <i data-lucide="x" class="h-6 w-6"></i>
+                </button>
+            </div>
+            <nav class="flex flex-col items-center justify-center flex-1 space-y-6">
+                <a href="index.html" class="text-2xl font-bold text-white hover:text-secondary font-anta">
+                    Services
+                </a>
+                <a href="index.html" class="text-2xl font-bold text-white hover:text-secondary font-anta">
+                    Find Fixers
+                </a>
+                <a href="index.html" class="text-2xl font-bold text-white hover:text-secondary font-anta">
+                    Post a Job
+                </a>
+                <a href="index.html" class="text-2xl font-bold text-white hover:text-secondary font-anta">
+                    How It Works
+                </a>
+                <div class="pt-6 flex flex-col space-y-4">
+                    <a href="index.html" class="btn btn-outline btn-outline-primary w-48 justify-center py-3 text-lg font-anta text-white border-white hover:bg-white/10">
+                        Log In
+                    </a>
+                    <a href="index.html" class="btn btn-secondary w-48 justify-center py-3 text-lg font-anta">
+                        Sign Up
+                    </a>
+                </div>
+            </nav>
+        </div>
+    </div>
 
     <!-- Hero Section -->
     <section class="bg-primary px-4 py-16 md:py-24 lg:py-32 text-white relative overflow-hidden">
@@ -471,7 +498,7 @@
         </div>
     </section>
 
-    <!-- Footer -->
+    <!-- Footer约定
     <footer class="bg-gray-900 text-white">
         <div class="container mx-auto max-w-6xl px-4 py-10 md:py-12">
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
@@ -550,7 +577,6 @@
                                 About Us
                             </a>
                         </li>
-                        votos
                         <li>
                             <a href="index.html" class="text-gray-400 hover:text-white transition-colors">
                                 Careers
@@ -639,21 +665,28 @@
         lucide.createIcons();
         
         // Mobile menu toggle
-        document.getElementById('mobile-menu-button').addEventListener('click', function() {
-            const mobileMenu = document.getElementById('mobile-menu');
-            const menuIcon = this.querySelector('[data-lucide]');
-            
-            if (mobileMenu.classList.contains('hidden')) {
-                mobileMenu.classList.remove('hidden');
-                menuIcon.setAttribute('name', 'x');
-            } else {
-                mobileMenu.classList.add('hidden');
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileMenuBackdrop = document.getElementById('mobile-menu-backdrop');
+        const mobileMenuClose = document.getElementById('mobile-menu-close');
+        const menuIcon = mobileMenuButton.querySelector('[data-lucide]');
+
+        function toggleMobileMenu() {
+            const isOpen = mobileMenu.classList.contains('open');
+            if (isOpen) {
+                mobileMenu.classList.remove('open');
+                mobileMenuBackdrop.classList.remove('open');
                 menuIcon.setAttribute('name', 'menu');
+            } else {
+                mobileMenu.classList.add('open');
+                mobileMenuBackdrop.classList.add('open');
+                menuIcon.setAttribute('name', 'x');
             }
-            
-            // Re-initialize icons after changing the icon name
             lucide.createIcons();
-        });
+        }
+
+        mobileMenuButton.addEventListener('click', toggleMobileMenu);
+        mobileMenuClose.addEventListener('click', toggleMobileMenu);
 
         // Chat functionality
         document.addEventListener('DOMContentLoaded', function() {
