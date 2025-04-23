@@ -107,6 +107,23 @@
             opacity: 1;
             pointer-events: auto;
         }
+
+        /* Hero Section Background Image */
+        .hero-bg {
+            background-image: url('https://ff6miz3krrdkxd1y.public.blob.vercel-storage.com/Capitol-Front--scaled-e1733378640595-ytVTzjF3D4mOf3i1vdYxmQ3Flpnmun.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.2;
+        }
+
+        /* Mobile view: Use contain to ensure the full image is visible */
+        @media (max-width: 767px) {
+            .hero-bg {
+                background-size: contain;
+                background-position: top center;
+            }
+        }
     </style>
 </head>
 <body class="min-h-screen bg-zinc-50">
@@ -124,7 +141,7 @@
 
                 <!-- Desktop Navigation -->
                 <nav class="hidden md:flex space-x-6 lg:space-x-8">
-                    <a href="index.html" class="text-gray-700 hover:text-primary font-medium font-lexend">
+                    <a href="services.html" class="text-gray-700 hover:text-primary font-medium font-lexend">
                         Services
                     </a>
                     <a href="index.html" class="text-gray-700 hover:text-primary font-medium font-lexend">
@@ -133,7 +150,7 @@
                     <a href="index.html" class="text-gray-700 hover:text-primary font-medium font-lexend">
                         Post a Job
                     </a>
-                    <a href="index.html" class="text-gray-700 hover:text-primary font-medium font-lexend">
+                    <a href="how-it-works.html" class="text-gray-700 hover:text-primary font-medium font-lexend">
                         How It Works
                     </a>
                 </nav>
@@ -165,16 +182,16 @@
                 </button>
             </div>
             <nav class="flex flex-col items-center justify-center flex-1 space-y-6">
-                <a href="index.html" class="text-2xl font-bold text-white hover:text-secondary font-anta">
+                <a href="services.html" class="mobile-nav-link text-2xl font-bold text-white hover:text-secondary font-anta">
                     Services
                 </a>
-                <a href="index.html" class="text-2xl font-bold text-white hover:text-secondary font-anta">
+                <a href="index.html" class="mobile-nav-link text-2xl font-bold text-white hover:text-secondary font-anta">
                     Find Fixers
                 </a>
-                <a href="index.html" class="text-2xl font-bold text-white hover:text-secondary font-anta">
+                <a href="index.html" class="mobile-nav-link text-2xl font-bold text-white hover:text-secondary font-anta">
                     Post a Job
                 </a>
-                <a href="index.html" class="text-2xl font-bold text-white hover:text-secondary font-anta">
+                <a href="how-it-works.html" class="mobile-nav-link text-2xl font-bold text-white hover:text-secondary font-anta">
                     How It Works
                 </a>
                 <div class="pt-6 flex flex-col space-y-4">
@@ -191,7 +208,7 @@
 
     <!-- Hero Section -->
     <section class="bg-primary px-4 py-16 md:py-24 lg:py-32 text-white relative overflow-hidden">
-        <div class="absolute inset-0 bg-[url('https://ff6miz3krrdkxd1y.public.blob.vercel-storage.com/Capitol-Front--scaled-e1733378640595-ytVTzjF3D4mOf3i1vdYxmQ3Flpnmun.jpg')] opacity-20 bg-cover bg-center"></div>
+        <div class="hero-bg absolute inset-0"></div>
         <div class="container mx-auto max-w-6xl relative z-10">
             <div class="max-w-2xl">
                 <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold font-anta mb-4 md:mb-6">
@@ -215,117 +232,6 @@
                     <button class="btn bg-accent hover:bg-accent/90 text-primary font-semibold py-3 px-6 rounded-lg font-poppins">
                         Find Help
                     </button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Services Section -->
-    <section class="py-12 md:py-16 px-4">
-        <div class="container mx-auto max-w-6xl">
-            <h2 class="text-2xl md:text-3xl font-bold mb-6 md:mb-10 text-center font-anta">Popular Services</h2>
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-6">
-                <a href="index.html" class="block">
-                    <div class="bg-white p-3 md:p-4 rounded-lg border border-gray-200 hover:border-secondary hover:shadow-md transition-all flex flex-col items-center text-center h-full">
-                        <div class="bg-secondary/10 p-2.5 md:p-3 rounded-full mb-2 md:mb-3 text-secondary">
-                            <i data-lucide="wrench" class="h-5 w-5 md:h-6 md:w-6"></i>
-                        </div>
-                        <h3 class="font-bold text-sm md:text-base mb-1 font-anta">Plumbing</h3>
-                        <p class="text-xs md:text-sm text-gray-600 font-lexend">Fix leaks, clogs, installations</p>
-                    </div>
-                </a>
-                <a href="index.html" class="block">
-                    <div class="bg-white p-3 md:p-4 rounded-lg border border-gray-200 hover:border-secondary hover:shadow-md transition-all flex flex-col items-center text-center h-full">
-                        <div class="bg-secondary/10 p-2.5 md:p-3 rounded-full mb-2 md:mb-3 text-secondary">
-                            <i data-lucide="lightbulb" class="h-5 w-5 md:h-6 md:w-6"></i>
-                        </div>
-                        <h3 class="font-bold text-sm md:text-base mb-1 font-anta">Electrical</h3>
-                        <p class="text-xs md:text-sm text-gray-600 font-lexend">Wiring, outlets, installations</p>
-                    </div>
-                </a>
-                <a href="index.html" class="block">
-                    <div class="bg-white p-3 md:p-4 rounded-lg border border-gray-200 hover:border-secondary hover:shadow-md transition-all flex flex-col items-center text-center h-full">
-                        <div class="bg-secondary/10 p-2.5 md:p-3 rounded-full mb-2 md:mb-3 text-secondary">
-                            <i data-lucide="tv" class="h-5 w-5 md:h-6 md:w-6"></i>
-                        </div>
-                        <h3 class="font-bold text-sm md:text-base mb-1 font-anta">TV & Electronics</h3>
-                        <p class="text-xs md:text-sm text-gray-600 font-lexend">Setup, repair, troubleshooting</p>
-                    </div>
-                </a>
-                <a href="index.html" class="block">
-                    <div class="bg-white p-3 md:p-4 rounded-lg border border-gray-200 hover:border-secondary hover:shadow-md transition-all flex flex-col items-center text-center h-full">
-                        <div class="bg-secondary/10 p-2.5 md:p-3 rounded-full mb-2 md:mb-3 text-secondary">
-                            <i data-lucide="air-vent" class="h-5 w-5 md:h-6 md:w-6"></i>
-                        </div>
-                        <h3 class="font-bold text-sm md:text-base mb-1 font-anta">A/C Repair</h3>
-                        <p class="text-xs md:text-sm text-gray-600 font-lexend">Maintenance and installations</p>
-                    </div>
-                </a>
-                <a href="index.html" class="block">
-                    <div class="bg-white p-3 md:p-4 rounded-lg border border-gray-200 hover:border-secondary hover:shadow-md transition-all flex flex-col items-center text-center h-full">
-                        <div class="bg-secondary/10 p-2.5 md:p-3 rounded-full mb-2 md:mb-3 text-secondary">
-                            <i data-lucide="paint-bucket" class="h-5 w-5 md:h-6 md:w-6"></i>
-                        </div>
-                        <h3 class="font-bold text-sm md:text-base mb-1 font-anta">Painting</h3>
-                        <p class="text-xs md:text-sm text-gray-600 font-lexend">Interior and exterior painting</p>
-                    </div>
-                </a>
-                <a href="index.html" class="block">
-                    <div class="bg-white p-3 md:p-4 rounded-lg border border-gray-200 hover:border-secondary hover:shadow-md transition-all flex flex-col items-center text-center h-full">
-                        <div class="bg-secondary/10 p-2.5 md:p-3 rounded-full mb-2 md:mb-3 text-secondary">
-                            <i data-lucide="hammer" class="h-5 w-5 md:h-6 md:w-6"></i>
-                        </div>
-                        <h3 class="font-bold text-sm md:text-base mb-1 font-anta">Carpentry</h3>
-                        <p class="text-xs md:text-sm text-gray-600 font-lexend">Furniture repair, woodwork</p>
-                    </div>
-                </a>
-                <a href="index.html" class="block">
-                    <div class="bg-white p-3 md:p-4 rounded-lg border border-gray-200 hover:border-secondary hover:shadow-md transition-all flex flex-col items-center text-center h-full">
-                        <div class="bg-secondary/10 p-2.5 md:p-3 rounded-full mb-2 md:mb-3 text-secondary">
-                            <i data-lucide="router" class="h-5 w-5 md:h-6 md:w-6"></i>
-                        </div>
-                        <h3 class="font-bold text-sm md:text-base mb-1 font-anta">Network Setup</h3>
-                        <p class="text-xs md:text-sm text-gray-600 font-lexend">WiFi, router configuration</p>
-                    </div>
-                </a>
-                <a href="index.html" class="block">
-                    <div class="bg-white p-3 md:p-4 rounded-lg border border-gray-200 hover:border-secondary hover:shadow-md transition-all flex flex-col items-center text-center h-full">
-                        <div class="bg-secondary/10 p-2.5 md:p-3 rounded-full mb-2 md:mb-3 text-secondary">
-                            <i data-lucide="lock" class="h-5 w-5 md:h-6 md:w-6"></i>
-                        </div>
-                        <h3 class="font-bold text-sm md:text-base mb-1 font-anta">Locksmith</h3>
-                        <p class="text-xs md:text-sm text-gray-600 font-lexend">Key cutting, lock repair</p>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- How It Works -->
-    <section class="bg-zinc-100 py-12 md:py-16 px-4">
-        <div class="container mx-auto max-w-6xl">
-            <h2 class="text-2xl md:text-3xl font-bold mb-8 md:mb-12 text-center font-anta">How It Works</h2>
-            <div class="grid md:grid-cols-3 gap-6 md:gap-8">
-                <div class="bg-white p-5 md:p-6 rounded-lg shadow-md text-center">
-                    <div class="bg-secondary/20 w-14 h-14 md:w-16 md:h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <span class="text-xl md:text-2xl font-bold text-secondary">1</span>
-                    </div>
-                    <h3 class="font-bold text-lg md:text-xl mb-2 md:mb-3 font-anta">Post Your Need</h3>
-                    <p class="text-gray-600 text-sm md:text-base font-lexend">Describe what you need help with and set your budget.</p>
-                </div>
-                <div class="bg-white p-5 md:p-6 rounded-lg shadow-md text-center">
-                    <div class="bg-secondary/20 w-14 h-14 md:w-16 md:h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <span class="text-xl md:text-2xl font-bold text-secondary">2</span>
-                    </div>
-                    <h3 class="font-bold text-lg md:text-xl mb-2 md:mb-3 font-anta">Get Connected</h3>
-                    <p class="text-gray-600 text-sm md:text-base font-lexend">Receive responses from available service providers in Ilocos Norte.</p>
-                </div>
-                <div class="bg-white p-5 md:p-6 rounded-lg shadow-md text-center">
-                    <div class="bg-secondary/20 w-14 h-14 md:w-16 md:h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <span class="text-xl md:text-2xl font-bold text-secondary">3</span>
-                    </div>
-                    <h3 class="font-bold text-lg md:text-xl mb-2 md:mb-3 font-anta">Job Done</h3>
-                    <p class="text-gray-600 text-sm md:text-base font-lexend">Get your issue resolved and leave a review for the service provider.</p>
                 </div>
             </div>
         </div>
@@ -507,7 +413,7 @@
                     <p class="text-gray-400 mb-4 text-sm md:text-base font-lexend">
                         Connecting skilled service providers with customers across Ilocos Norte.
                     </p>
-                    <div class="flex space-x-4">
+                    <div class="flex space-x- gradio: 4">
                         <a href="index.html" class="text-gray-400 hover:text-white transition-colors">
                             <i data-lucide="facebook" class="h-5 w-5"></i>
                         </a>
@@ -533,7 +439,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="index.html" class="text-gray-400 hover:text-white transition-colors">
+                            <a href="how-it-works.html" class="text-gray-400 hover:text-white transition-colors">
                                 How It Works
                             </a>
                         </li>
@@ -686,6 +592,12 @@
 
         mobileMenuButton.addEventListener('click', toggleMobileMenu);
         mobileMenuClose.addEventListener('click', toggleMobileMenu);
+
+        // Close mobile menu when a nav link is clicked
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', toggleMobileMenu);
+        });
 
         // Chat functionality
         document.addEventListener('DOMContentLoaded', function() {
