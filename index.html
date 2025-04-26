@@ -117,11 +117,22 @@
             opacity: 0.2;
         }
 
-        /* Mobile view: Use contain to ensure the full image is visible */
+        /* Full-screen hero section */
+        .hero-section {
+            min-height: calc(100vh - 56px); /* Default header height on mobile (h-14 = 56px) */
+        }
+
+        @media (min-width: 768px) {
+            .hero-section {
+                min-height: calc(100vh - 64px); /* Header height on desktop (md:h-16 = 64px) */
+            }
+        }
+
+        /* Ensure image fills the viewport on mobile */
         @media (max-width: 767px) {
             .hero-bg {
-                background-size: contain;
-                background-position: top center;
+                background-size: cover;
+                background-position: center;
             }
         }
     </style>
@@ -186,7 +197,7 @@
                     Services
                 </a>
                 <a href="find-handyman.html" class="mobile-nav-link text-2xl font-bold text-white hover:text-secondary font-anta">
-                     Find HandyMan
+                    Find HandyMan
                 </a>
                 <a href="post-job.html" class="mobile-nav-link text-2xl font-bold text-white hover:text-secondary font-anta">
                     Post a Job
@@ -207,7 +218,7 @@
     </div>
 
     <!-- Hero Section -->
-    <section class="bg-primary px-4 py-16 md:py-24 lg:py-32 text-white relative overflow-hidden">
+    <section class="hero-section bg-primary px-4 text-white relative overflow-hidden flex items-center justify-center">
         <div class="hero-bg absolute inset-0"></div>
         <div class="container mx-auto max-w-6xl relative z-10">
             <div class="max-w-2xl">
@@ -413,7 +424,7 @@
                     <p class="text-gray-400 mb-4 text-sm md:text-base font-lexend">
                         Connecting skilled service providers with customers across Ilocos Norte.
                     </p>
-                    <div class="flex space-x- gradio: 4">
+                    <div class="flex space-x-4">
                         <a href="index.html" class="text-gray-400 hover:text-white transition-colors">
                             <i data-lucide="facebook" class="h-5 w-5"></i>
                         </a>
@@ -581,11 +592,11 @@
             if (isOpen) {
                 mobileMenu.classList.remove('open');
                 mobileMenuBackdrop.classList.remove('open');
-                menuIcon.setAttribute('name', 'menu');
+                menuIcon.setAttribute('data-lucide', 'menu');
             } else {
                 mobileMenu.classList.add('open');
                 mobileMenuBackdrop.classList.add('open');
-                menuIcon.setAttribute('name', 'x');
+                menuIcon.setAttribute('data-lucide', 'x');
             }
             lucide.createIcons();
         }
