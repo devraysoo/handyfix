@@ -82,73 +82,55 @@
             background-color: rgba(96, 16, 8, 0.1);
         }
 
-        /* Add chat window transition styles */
         .chat-window {
             transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
         }
         
-        /* Updated Step Indicator Styles */
-        .step-container {
+        /* Step indicator styles */
+        .step-indicator {
             position: relative;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            align-items: center;
-            gap: 2rem; /* Space between steps */
-            margin-bottom: 2rem;
         }
-
-        .step-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            position: relative;
-            z-index: 1;
-            flex: 1 1 200px; /* Ensure steps wrap properly on smaller screens */
-            max-width: calc(50% - 1rem); /* Two steps per row on medium screens */
-        }
-
-        .step-circle {
-            width: 1.5rem; /* Matches h-6 w-6 */
-            height: 1.5rem;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 0.875rem; /* Matches text-sm */
-            transition: background-color 0.3s, color 0.3s;
-        }
-
-        .step-circle.primary {
-            background-color: #601008; /* bg-primary */
-            color: white;
-        }
-
-        .step-circle.secondary {
-            background-color: #F88820; /* bg-secondary */
-            color: white;
-        }
-
-        .step-content {
-            text-align: center;
-            margin-top: 1rem; /* Space between circle and content */
-        }
-
-        .step-line {
+        
+        .step-indicator::before {
+            content: '';
             position: absolute;
-            top: 0.75rem; /* Center of the circle (circle height / 2) */
-            left: 0;
-            right: 0;
-            height: 2px;
-            background-color: #e5e7eb; /* bg-gray-200 */
+            top: 0;
+            bottom: 0;
+            left: 12px;
+            width: 2px;
+            background-color: #e5e7eb;
             z-index: 0;
         }
+        
+        .step-indicator .step:last-child::before {
+            display: none;
+        }
+        
+        .step-indicator .step-circle {
+            position: relative;
+            z-index: 1;
+        }
 
-        @media (max-width: 768px) {
-            .step-item {
-                max-width: 100%; /* Full width on small screens */
-            }
+        /* Mobile Menu Styles */
+        #mobile-menu {
+            transform: translateX(100%);
+            transition: transform 300ms ease-in-out;
+        }
+
+        #mobile-menu.open {
+            transform: translateX(0);
+        }
+
+        #mobile-menu-backdrop {
+            background: rgba(0, 0, 0, 0.5);
+            transition: opacity 300ms ease-in-out;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        #mobile-menu-backdrop.open {
+            opacity: 1;
+            pointer-events: auto;
         }
     </style>
 </head>
@@ -197,35 +179,40 @@
                 </button>
             </div>
         </div>
-
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="md:hidden bg-white border-t hidden">
-            <div class="container mx-auto px-4 py-3">
-                <nav class="flex flex-col space-y-3">
-                    <a href="services.php" class="py-2 text-gray-700 font-medium font-lexend">
-                        Services
-                    </a>
-                    <a href="find-handyman.php" class="py-2 text-gray-700 font-medium font-lexend">
-                        Find Fixers
-                    </a>
-                    <a href="post-job.php" class="py-2 text-gray-700 font-medium font-lexend">
-                        Post a Job
-                    </a>
-                    <a href="how-it-works.php" class="py-2 text-primary font-medium font-lexend">
-                        How It Works
-                    </a>
-                    <div class="pt-2 flex flex-col space-y-2">
-                        <a href="./user/login.php" class="btn btn-outline btn-outline-primary w-full justify-center py-2 font-lexend">
-                            Log In
-                        </a>
-                        <a href="./user/signup.php" class="btn btn-primary w-full justify-center py-2 font-lexend">
-                            Sign Up
-                        </a>
-                    </div>
-                </nav>
-            </div>
-        </div>
     </header>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu-backdrop" class="md:hidden fixed inset-0 z-40">
+        <div id="mobile-menu" class="fixed top-0 right-0 h-screen w-screen bg-primary text-white flex flex-col">
+            <div class="flex justify-end p-4">
+                <button id="mobile-menu-close" class="text-white">
+                    <i data-lucide="x" class="h-6 w-6"></i>
+                </button>
+            </div>
+            <nav class="flex flex-col items-center justify-center flex-1 space-y-6">
+                <a href="services.html" class="mobile-nav-link text-2xl font-bold text-white hover:text-secondary font-anta">
+                    Services
+                </a>
+                <a href="find-handyman.html" class="mobile-nav-link text-2xl font-bold text-white hover:text-secondary font-anta">
+                    Find HandyMan
+                </a>
+                <a href="post-job.html" class="mobile-nav-link text-2xl font-bold text-white hover:text-secondary font-anta">
+                    Post a Job
+                </a>
+                <a href="how-it-works.html" class="mobile-nav-link text-2xl font-bold text-white hover:text-secondary font-anta">
+                    How It Works
+                </a>
+                <div class="pt-6 flex flex-col space-y-4">
+                    <a href="login.html" class="btn btn-outline btn-outline-primary w-48 justify-center py-3 text-lg font-anta text-white border-white hover:bg-white/10">
+                        Log In
+                    </a>
+                    <a href="signup.html" class="btn btn-secondary w-48 justify-center py-3 text-lg font-anta">
+                        Sign Up
+                    </a>
+                </div>
+            </nav>
+        </div>
+    </div>
 
     <!-- Hero Section -->
     <section class="bg-primary/10 py-12 md:py-16 px-4">
@@ -257,94 +244,95 @@
                 </p>
             </div>
 
-            <div class="step-container">
-                <div class="step-line"></div>
-                <!-- Step 1 -->
-                <div class="step-item">
-                    <div class="step-circle primary">1</div>
-                    <div class="step-content">
-                        <h3 class="text-xl font-bold mb-2 font-anta">Create an Account</h3>
-                        <p class="text-gray-600 mb-4 font-lexend">
-                            Sign up for a free account to access our network of skilled service providers. Provide basic information about yourself to get started.
-                        </p>
-                        <a href="./user/signup.php" class="text-primary font-medium hover:underline inline-flex items-center font-lexend">
-                            Sign Up Now
-                            <i data-lucide="arrow-right" class="h-4 w-4 ml-1"></i>
-                        </a>
+            <div class="step-indicator">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 mb-8">
+                    <!-- Step 1 -->
+                    <div class="flex gap-4 step">
+                        <div class="step-circle bg-primary h-6 w-6 rounded-full flex items-center justify-center text-white font-bold text-sm flex-shrink-0">1</div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-2 font-anta">Create an Account</h3>
+                            <p class="text-gray-600 mb-4 font-lexend">
+                                Sign up for a free account to access our network of skilled service providers. Provide basic information about yourself to get started.
+                            </p>
+                            <a href="./user/signup.php" class="text-primary font-medium hover:underline inline-flex items-center font-lexend">
+                                Sign Up Now
+                                <i data-lucide="arrow-right" class="h-4 w-4 ml-1"></i>
+                            </a>
+                        </div>
                     </div>
-                </div>
 
-                <!-- Step 2 -->
-                <div class="step-item">
-                    <div class="step-circle primary">2</div>
-                    <div class="step-content">
-                        <h3 class="text-xl font-bold mb-2 font-anta">Describe Your Project</h3>
-                        <p class="text-gray-600 mb-4 font-lexend">
-                            Tell us what you need help with. Provide details about your project, including the type of service, location, and preferred schedule.
-                        </p>
-                        <a href="post-job.php" class="text-primary font-medium hover:underline inline-flex items-center font-lexend">
-                            Post a Job
-                            <i data-lucide="arrow-right" class="h-4 w-4 ml-1"></i>
-                        </a>
+                    <!-- Step 2 -->
+                    <div class="flex gap-4 step">
+                        <div class="step-circle bg-primary h-6 w-6 rounded-full flex items-center justify-center text-white font-bold text-sm flex-shrink-0">2</div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-2 font-anta">Describe Your Project</h3>
+                            <p class="text-gray-600 mb-4 font-lexend">
+                                Tell us what you need help with. Provide details about your project, including the type of service, location, and preferred schedule.
+                            </p>
+                            <a href="post-job.php" class="text-primary font-medium hover:underline inline-flex items-center font-lexend">
+                                Post a Job
+                                <i data-lucide="arrow-right" class="h-4 w-4 ml-1"></i>
+                            </a>
+                        </div>
                     </div>
-                </div>
 
-                <!-- Step 3 -->
-                <div class="step-item">
-                    <div class="step-circle primary">3</div>
-                    <div class="step-content">
-                        <h3 class="text-xl font-bold mb-2 font-anta">Browse Service Providers</h3>
-                        <p class="text-gray-600 mb-4 font-lexend">
-                            Review profiles of available service providers in your area. Compare ratings, reviews, experience, and pricing to find the right match for your project.
-                        </p>
-                        <a href="find-handyman.php" class="text-primary font-medium hover:underline inline-flex items-center font-lexend">
-                            Find Fixers
-                            <i data-lucide="arrow-right" class="h-4 w-4 ml-1"></i>
-                        </a>
+                    <!-- Step 3 -->
+                    <div class="flex gap-4 step">
+                        <div class="step-circle bg-primary h-6 w-6 rounded-full flex items-center justify-center text-white font-bold text-sm flex-shrink-0">3</div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-2 font-anta">Browse Service Providers</h3>
+                            <p class="text-gray-600 mb-4 font-lexend">
+                                Review profiles of available service providers in your area. Compare ratings, reviews, experience, and pricing to find the right match for your project.
+                            </p>
+                            <a href="find-handyman.php" class="text-primary font-medium hover:underline inline-flex items-center font-lexend">
+                                Find Fixers
+                                <i data-lucide="arrow-right" class="h-4 w-4 ml-1"></i>
+                            </a>
+                        </div>
                     </div>
-                </div>
 
-                <!-- Step 4 -->
-                <div class="step-item">
-                    <div class="step-circle primary">4</div>
-                    <div class="step-content">
-                        <h3 class="text-xl font-bold mb-2 font-anta">Book and Pay</h3>
-                        <p class="text-gray-600 mb-4 font-lexend">
-                            Schedule the service and pay securely through our platform. You'll only be charged once the job is completed to your satisfaction.
-                        </p>
-                        <a href="#" class="text-primary font-medium hover:underline inline-flex items-center font-lexend">
-                            Learn About Payments
-                            <i data-lucide="arrow-right" class="h-4 w-4 ml-1"></i>
-                        </a>
+                    <!-- Step 4 -->
+                    <div class="flex gap-4 step">
+                        <div class="step-circle bg-primary h-6 w-6 rounded-full flex items-center justify-center text-white font-bold text-sm flex-shrink-0">4</div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-2 font-anta">Book and Pay</h3>
+                            <p class="text-gray-600 mb-4 font-lexend">
+                                Schedule the service through our platform. Once the job is completed to your satisfaction, pay the handyman directly in person.
+                            </p>
+                            <a href="#" class="text-primary font-medium hover:underline inline-flex items-center font-lexend">
+                                Learn More
+                                <i data-lucide="arrow-right" class="h-4 w-4 ml-1"></i>
+                            </a>
+                        </div>
                     </div>
-                </div>
 
-                <!-- Step 5 -->
-                <div class="step-item">
-                    <div class="step-circle primary">5</div>
-                    <div class="step-content">
-                        <h3 class="text-xl font-bold mb-2 font-anta">Get the Job Done</h3>
-                        <p class="text-gray-600 mb-4 font-lexend">
-                            The service provider will arrive at the scheduled time to complete your project. You can communicate directly with them through our platform.
-                        </p>
+                    <!-- Step 5 -->
+                    <div class="flex gap-4 step">
+                        <div class="step-circle bg-primary h-6 w-6 rounded-full flex items-center justify-center text-white font-bold text-sm flex-shrink-0">5</div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-2 font-anta">Get the Job Done</h3>
+                            <p class="text-gray-600 mb-4 font-lexend">
+                                The service provider will arrive at the scheduled time to complete your project. You can communicate directly with them through our platform.
+                            </p>
+                        </div>
                     </div>
-                </div>
 
-                <!-- Step 6 -->
-                <div class="step-item">
-                    <div class="step-circle primary">6</div>
-                    <div class="step-content">
-                        <h3 class="text-xl font-bold mb-2 font-anta">Leave a Review</h3>
-                        <p class="text-gray-600 mb-4 font-lexend">
-                            After the job is completed, rate and review the service provider to help others in the community make informed decisions.
-                        </p>
+                    <!-- Step 6 -->
+                    <div class="flex gap-4 step">
+                        <div class="step-circle bg-primary h-6 w-6 rounded-full flex items-center justify-center text-white font-bold text-sm flex-shrink-0">6</div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-2 font-anta">Leave a Review</h3>
+                            <p class="text-gray-600 mb-4 font-lexend">
+                                After the job is completed, rate and review the service provider to help others in the community make informed decisions.
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <div class="bg-white p-6 rounded-lg border border-gray-200 shadow-sm mt-8">
                 <h3 class="text-xl font-bold mb-4 font-anta">Customer Guarantees</h3>
-                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div class="flex gap-3">
                         <div class="bg-primary/10 p-2 rounded-full h-10 w-10 flex items-center justify-center flex-shrink-0">
                             <i data-lucide="shield-check" class="h-5 w-5 text-primary"></i>
@@ -352,15 +340,6 @@
                         <div>
                             <h4 class="font-semibold mb-1 font-lexend">Verified Providers</h4>
                             <p class="text-gray-600 text-sm font-lexend">All service providers undergo background checks and skill verification.</p>
-                        </div>
-                    </div>
-                    <div class="flex gap-3">
-                        <div class="bg-primary/10 p-2 rounded-full h-10 w-10 flex items-center justify-center flex-shrink-0">
-                            <i data-lucide="wallet" class="h-5 w-5 text-primary"></i>
-                        </div>
-                        <div>
-                            <h4 class="font-semibold mb-1 font-lexend">Secure Payments</h4>
-                            <p class="text-gray-600 text-sm font-lexend">Your payment is held securely until the job is completed to your satisfaction.</p>
                         </div>
                     </div>
                     <div class="flex gap-3">
@@ -387,87 +366,88 @@
                 </p>
             </div>
 
-            <div class="step-container">
-                <div class="step-line"></div>
-                <!-- Step 1 -->
-                <div class="step-item">
-                    <div class="step-circle secondary">1</div>
-                    <div class="step-content">
-                        <h3 class="text-xl font-bold mb-2 font-anta">Create a Provider Account</h3>
-                        <p class="text-gray-600 mb-4 font-lexend">
-                            Sign up as a service provider and create your professional profile. Provide details about your skills, experience, and services offered.
-                        </p>
-                        <a href="register-provider.php" class="text-secondary font-medium hover:underline inline-flex items-center font-lexend">
-                            Join as a Provider
-                            <i data-lucide="arrow-right" class="h-4 w-4 ml-1"></i>
-                        </a>
+            <div class="step-indicator">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 mb-8">
+                    <!-- Step 1 -->
+                    <div class="flex gap-4 step">
+                        <div class="step-circle bg-secondary h-6 w-6 rounded-full flex items-center justify-center text-white font-bold text-sm flex-shrink-0">1</div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-2 font-anta">Create a Provider Account</h3>
+                            <p class="text-gray-600 mb-4 font-lexend">
+                                Sign up as a service provider and create your professional profile. Provide details about your skills, experience, and services offered.
+                            </p>
+                            <a href="register-provider.php" class="text-secondary font-medium hover:underline inline-flex items-center font-lexend">
+                                Join as a Provider
+                                <i data-lucide="arrow-right" class="h-4 w-4 ml-1"></i>
+                            </a>
+                        </div>
                     </div>
-                </div>
 
-                <!-- Step 2 -->
-                <div class="step-item">
-                    <div class="step-circle secondary">2</div>
-                    <div class="step-content">
-                        <h3 class="text-xl font-bold mb-2 font-anta">Complete Verification</h3>
-                        <p class="text-gray-600 mb-4 font-lexend">
-                            Undergo our verification process, including background checks and skill verification, to build trust with potential customers.
-                        </p>
-                        <a href="verification-process.php" class="text-secondary font-medium hover:underline inline-flex items-center font-lexend">
-                            Learn About Verification
-                            <i data-lucide="arrow-right" class="h-4 w-4 ml-1"></i>
-                        </a>
+                    <!-- Step 2 -->
+                    <div class="flex gap-4 step">
+                        <div class="step-circle bg-secondary h-6 w-6 rounded-full flex items-center justify-center text-white font-bold text-sm flex-shrink-0">2</div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-2 font-anta">Complete Verification</h3>
+                            <p class="text-gray-600 mb-4 font-lexend">
+                                Undergo our verification process, including background checks and skill verification, to build trust with potential customers.
+                            </p>
+                            <a href="verification-process.php" class="text-secondary font-medium hover:underline inline-flex items-center font-lexend">
+                                Learn About Verification
+                                <i data-lucide="arrow-right" class="h-4 w-4 ml-1"></i>
+                            </a>
+                        </div>
                     </div>
-                </div>
 
-                <!-- Step 3 -->
-                <div class="step-item">
-                    <div class="step-circle secondary">3</div>
-                    <div class="step-content">
-                        <h3 class="text-xl font-bold mb-2 font-anta">Set Your Availability</h3>
-                        <p class="text-gray-600 mb-4 font-lexend">
-                            Define your working hours, service area, and pricing. You have full control over when and where you want to work.
-                        </p>
+                    <!-- Step 3 -->
+                    <div class="flex gap-4 step">
+                        <div class="step-circle bg-secondary h-6 w-6 rounded-full flex items-center justify-center text-white font-bold text-sm flex-shrink-0">3</div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-2 font-anta">Set Your Availability</h3>
+                            <p class="text-gray-600 mb-4 font-lexend">
+                                Define your working hours, service area, and pricing. You have full control over when and where you want to work.
+                            </p>
+                        </div>
                     </div>
-                </div>
 
-                <!-- Step 4 -->
-                <div class="step-item">
-                    <div class="step-circle secondary">4</div>
-                    <div class="step-content">
-                        <h3 class="text-xl font-bold mb-2 font-anta">Receive Job Requests</h3>
-                        <p class="text-gray-600 mb-4 font-lexend">
-                            Get notified when customers request your services. You can review job details and choose which projects to accept.
-                        </p>
-                        <a href="find-jobs.php" class="text-secondary font-medium hover:underline inline-flex items-center font-lexend">
-                            Browse Available Jobs
-                            <i data-lucide="arrow-right" class="h-4 w-4 ml-1"></i>
-                        </a>
+                    <!-- Step 4 -->
+                    <div class="flex gap-4 step">
+                        <div class="step-circle bg-secondary h-6 w-6 rounded-full flex items-center justify-center text-white font-bold text-sm flex-shrink-0">4</div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-2 font-anta">Receive Job Requests</h3>
+                            <p class="text-gray-600 mb-4 font-lexend">
+                                Get notified when customers request your services. You can review job details and choose which projects to accept.
+                            </p>
+                            <a href="find-jobs.php" class="text-secondary font-medium hover:underline inline-flex items-center font-lexend">
+                                Browse Available Jobs
+                                <i data-lucide="arrow-right" class="h-4 w-4 ml-1"></i>
+                            </a>
+                        </div>
                     </div>
-                </div>
 
-                <!-- Step 5 -->
-                <div class="step-item">
-                    <div class="step-circle secondary">5</div>
-                    <div class="step-content">
-                        <h3 class="text-xl font-bold mb-2 font-anta">Complete Jobs</h3>
-                        <p class="text-gray-600 mb-4 font-lexend">
-                            Provide excellent service to customers. Communicate through our platform and update job status as you progress.
-                        </p>
+                    <!-- Step 5 -->
+                    <div class="flex gap-4 step">
+                        <div class="step-circle bg-secondary h-6 w-6 rounded-full flex items-center justify-center text-white font-bold text-sm flex-shrink-0">5</div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-2 font-anta">Complete Jobs</h3>
+                            <p class="text-gray-600 mb-4 font-lexend">
+                                Provide excellent service to customers. Communicate through our platform and update job status as you progress.
+                            </p>
+                        </div>
                     </div>
-                </div>
 
-                <!-- Step 6 -->
-                <div class="step-item">
-                    <div class="step-circle secondary">6</div>
-                    <div class="step-content">
-                        <h3 class="text-xl font-bold mb-2 font-anta">Get Paid</h3>
-                        <p class="text-gray-600 mb-4 font-lexend">
-                            Receive secure payments through our platform. Payments are processed quickly after job completion and customer approval.
-                        </p>
-                        <a href="payment-info.php" class="text-secondary font-medium hover:underline inline-flex items-center font-lexend">
-                            Payment Information
-                            <i data-lucide="arrow-right" class="h-4 w-4 ml-1"></i>
-                        </a>
+                    <!-- Step 6 -->
+                    <div class="flex gap-4 step">
+                        <div class="step-circle bg-secondary h-6 w-6 rounded-full flex items-center justify-center text-white font-bold text-sm flex-shrink-0">6</div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-2 font-anta">Get Paid</h3>
+                            <p class="text-gray-600 mb-4 font-lexend">
+                                After completing the job and receiving customer approval, get paid directly by the customer in person.
+                            </p>
+                            <a href="payment-info.php" class="text-secondary font-medium hover:underline inline-flex items-center font-lexend">
+                                Payment Information
+                                <i data-lucide="arrow-right" class="h-4 w-4 ml-1"></i>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -538,7 +518,7 @@
                 <div class="bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
                     <h3 class="text-lg font-bold mb-3 font-anta">What if I'm not satisfied with the service?</h3>
                     <p class="text-gray-600 font-lexend">
-                        We offer a satisfaction guarantee. If you're not happy with the service provided, contact our customer support team within 48 hours, and we'll work to resolve the issue or provide a refund.
+                        We offer a satisfaction guarantee. If you're not happy with the service provided, contact our customer support team within 48 hours, and we'll work to resolve the issue.
                     </p>
                 </div>
 
@@ -546,7 +526,7 @@
                 <div class="bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
                     <h3 class="text-lg font-bold mb-3 font-anta">How do I pay for services?</h3>
                     <p class="text-gray-600 font-lexend">
-                        Payments are processed securely through our platform. You can pay using credit/debit cards, GCash, or bank transfers. Payment is only released to the service provider after you approve the completed work.
+                        After the service provider completes the job to your satisfaction, you pay them directly in person. Payment methods are agreed upon between you and the provider, such as cash or mobile payment apps.
                     </p>
                 </div>
 
@@ -763,20 +743,33 @@
         lucide.createIcons();
         
         // Mobile menu toggle
-        document.getElementById('mobile-menu-button').addEventListener('click', function() {
-            const mobileMenu = document.getElementById('mobile-menu');
-            const menuIcon = this.querySelector('[data-lucide]');
-            
-            if (mobileMenu.classList.contains('hidden')) {
-                mobileMenu.classList.remove('hidden');
-                menuIcon.setAttribute('name', 'x');
-            } else {
-                mobileMenu.classList.add('hidden');
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileMenuBackdrop = document.getElementById('mobile-menu-backdrop');
+        const mobileMenuClose = document.getElementById('mobile-menu-close');
+        const menuIcon = mobileMenuButton.querySelector('[data-lucide]');
+
+        function toggleMobileMenu() {
+            const isOpen = mobileMenu.classList.contains('open');
+            if (isOpen) {
+                mobileMenu.classList.remove('open');
+                mobileMenuBackdrop.classList.remove('open');
                 menuIcon.setAttribute('name', 'menu');
+            } else {
+                mobileMenu.classList.add('open');
+                mobileMenuBackdrop.classList.add('open');
+                menuIcon.setAttribute('name', 'x');
             }
-            
-            // Re-initialize icons after changing the icon name
             lucide.createIcons();
+        }
+
+        mobileMenuButton.addEventListener('click', toggleMobileMenu);
+        mobileMenuClose.addEventListener('click', toggleMobileMenu);
+
+        // Close mobile menu when a nav link is clicked
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', toggleMobileMenu);
         });
 
         // Chat functionality
