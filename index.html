@@ -117,14 +117,25 @@
             opacity: 0.2;
         }
 
+        /* Hero Overlay */
+        .hero-overlay {
+            background-color: rgba(96, 16, 8, 0.7); /* Primary color with opacity */
+            position: absolute;
+            inset: 0;
+        }
+
         /* Full-screen hero section */
         .hero-section {
             min-height: calc(100vh - 56px); /* Default header height on mobile (h-14 = 56px) */
+            padding-top: 4rem; /* pt-16 */
+            padding-bottom: 4rem; /* pb-16 */
         }
 
         @media (min-width: 768px) {
             .hero-section {
                 min-height: calc(100vh - 64px); /* Header height on desktop (md:h-16 = 64px) */
+                padding-top: 6rem; /* md:pt-24 */
+                padding-bottom: 6rem; /* md:pb-24 */
             }
         }
 
@@ -134,6 +145,12 @@
                 background-size: cover;
                 background-position: center;
             }
+        }
+
+        /* Search Input Styling */
+        .search-input {
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
     </style>
 </head>
@@ -218,14 +235,15 @@
     </div>
 
     <!-- Hero Section -->
-    <section class="hero-section bg-primary px-4 text-white relative overflow-hidden flex items-center justify-center">
+    <section class="hero-section bg-primary px-4 text-white relative overflow-hidden">
         <div class="hero-bg absolute inset-0"></div>
+        <div class="hero-overlay absolute inset-0"></div>
         <div class="container mx-auto max-w-6xl relative z-10">
             <div class="max-w-2xl">
-                <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold font-anta mb-4 md:mb-6">
-                    Find HandyMan In Ilocos Norte
+                <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold font-anta mb-6 md:mb-8">
+                    Find HandyMan In<br>Ilocos Norte
                 </h1>
-                <p class="text-base md:text-lg lg:text-xl mb-6 md:mb-8 font-lexend">
+                <p class="text-base md:text-lg lg:text-xl mb-8 md:mb-10 font-lexend">
                     Connect with reliable home service providers for plumbing, electrical work, 
                     appliance repair, and more in your area.
                 </p>
@@ -237,7 +255,7 @@
                         <input 
                             type="text"
                             placeholder="What needs fixing?"
-                            class="py-3 pl-10 pr-4 w-full rounded-lg border-0 font-lexend text-sm md:text-base text-gray-800"
+                            class="search-input py-3 pl-10 pr-4 w-full rounded-lg border-0 font-lexend text-sm md:text-base text-gray-800"
                         />
                     </div>
                     <button class="btn bg-accent hover:bg-accent/90 text-primary font-semibold py-3 px-6 rounded-lg font-poppins">
