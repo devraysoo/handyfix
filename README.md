@@ -44,3 +44,5 @@ For inquiries, reach out to us at support@handyfix.com or join our community on 
 
 
   © 2025 HandyFix Ilocos Norte. All rights reserved.
+
+a
